@@ -7,6 +7,7 @@ import { StatusLabel } from '../StatusLabel';
 import { useInterval } from '../../hooks/useInterval';
 
 import './style.scss';
+import { reverse } from 'dns';
 
 type MainTimerProps = {
   chillTime: number;
@@ -17,6 +18,7 @@ type MainTimerProps = {
 export type Status = 'idle' | 'chilling' | 'working';
 
 export function MainTimer(props: MainTimerProps) {
+  // Too many stuff here, I'll reallocate components after base functionalities are done
   const [chillTime, setChillTime] = React.useState(props.chillTime);
   const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
   const [status, setStatus] = React.useState<Status>('idle');
@@ -45,15 +47,38 @@ export function MainTimer(props: MainTimerProps) {
     setStatus('working');
   };
 
+  const checkChillTimeLeft = () => {
+    // Checking against 1 to prevent state change delay from altering counters
+    if (chillTime <= 1) {
+      const newReversePomodoros = reversePomodoros + 1;
+      setReversePomodoros(newReversePomodoros);
+      setStatus('working');
+      setChillTime(props.chillTime);
+
+      // Using const instead of state to work around state change delay
+      if (newReversePomodoros % 4 === 0) setWorkTime(props.longWorkTime);
+    }
+  };
+
+  const checkWorkTimeLeft = () => {
+    // Checking against 1 to prevent state change delay from altering counters
+    if (workTime <= 1) {
+      setStatus('chilling');
+      setWorkTime(props.shortWorkTime);
+    }
+  };
+
   useInterval(() => {
     if (!paused) {
       if (status === 'chilling') {
         setChillTime(chillTime - 1);
         setTotalChillingTime(totalChillingTime + 1);
+        checkChillTimeLeft();
       }
       if (status === 'working') {
         setWorkTime(workTime - 1);
         setTotalWorkingTime(totalWorkingTime + 1);
+        checkWorkTimeLeft();
       }
     }
   }, 1000);
