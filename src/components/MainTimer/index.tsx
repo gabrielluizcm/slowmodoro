@@ -20,25 +20,43 @@ export function MainTimer(props: MainTimerProps) {
   const [chillTime, setChillTime] = React.useState(props.chillTime);
   const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
   const [status, setStatus] = React.useState<Status>('idle');
+  const [paused, setPaused] = React.useState(false);
   const [reversePomodoros, setReversePomodoros] = React.useState(0);
-  const [chillingTime, setChillingTime] = React.useState(0);
-  const [workingTime, setWorkingTime] = React.useState(0);
-
-  useInterval(() => {
-    if (status === 'chilling') setChillTime(chillTime - 1);
-    if (status === 'working') setWorkTime(workTime - 1);
-  }, 1000);
+  const [totalChillingTime, setTotalChillingTime] = React.useState(0);
+  const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
 
   const background = setBackground(status);
   const times = {
     chillTime,
     workTime,
   };
-  const defaultTimes = {
-    chillTime: props.chillTime,
-    shortWorkTime: props.shortWorkTime,
-    longWorkTime: props.longWorkTime,
+
+  const handleChillButton = () => {
+    if (status === 'chilling') setPaused(!paused);
+    else setPaused(false);
+
+    setStatus('chilling');
   };
+
+  const handleWorkButton = () => {
+    if (status === 'working') setPaused(!paused);
+    else setPaused(false);
+
+    setStatus('working');
+  };
+
+  useInterval(() => {
+    if (!paused) {
+      if (status === 'chilling') {
+        setChillTime(chillTime - 1);
+        setTotalChillingTime(totalChillingTime + 1);
+      }
+      if (status === 'working') {
+        setWorkTime(workTime - 1);
+        setTotalWorkingTime(totalWorkingTime + 1);
+      }
+    }
+  }, 1000);
 
   return (
     <>
@@ -46,8 +64,20 @@ export function MainTimer(props: MainTimerProps) {
       <div className="pomodoro">
         <StatusLabel status={status} reversePomodoros={reversePomodoros} />
         <TimerSwitch status={status} times={times} />
-        <Button onClick={() => setStatus('chilling')}>Chill</Button>
-        <Button onClick={() => setStatus('working')}>Work</Button>
+        <Button
+          onClick={handleChillButton}
+          className={status === 'chilling' ? 'active chilling' : ''}
+          paused={paused}
+        >
+          Chill
+        </Button>
+        <Button
+          onClick={handleWorkButton}
+          className={status === 'working' ? 'active working' : ''}
+          paused={paused}
+        >
+          Work
+        </Button>
       </div>
     </>
   );

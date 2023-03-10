@@ -10,4 +10,18 @@ button {
   background-color: colors.$regularText;
   color: colors.$regularBackground;
   margin: 0 10px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &.active {
+    background-color: colors.$activeButton;
+
+    &.chilling {
+      color: colors.$chillingBackground;
+    }
+
+    &.working {
+      color: colors.$shortWorkBackground;
+    }
+  }
 }
