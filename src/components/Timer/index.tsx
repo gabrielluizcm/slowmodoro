@@ -1,16 +1,13 @@
 import React from 'react';
-import { useInterval } from '../../hooks/useInterval';
+
+import { secondsToTime } from '../../utils/secondsToTime';
+
+import './style.scss';
 
 type TimerProps = {
-  defaultTime: number;
+  currentTimer: number;
 };
 
 export function Timer(props: TimerProps) {
-  const [defaultTime, setDefaultTime] = React.useState(props.defaultTime);
-
-  useInterval(() => {
-    setDefaultTime(defaultTime - 1);
-  }, 1000);
-
-  return <div>{defaultTime}</div>;
+  return <div className="timer">{secondsToTime(props.currentTimer)}</div>;
 }

@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { Timer } from './components/Timer';
+import { ChillingTimer } from './components/ChillingTimer';
 
 import './index.css';
 
 function App() {
   return (
     <>
-      <h1>Hello world!</h1>
       <h2>Reverse Pomodoro WIP</h2>
-      <Timer defaultTime={300} />
+      <ChillingTimer defaultTime={300} />
     </>
   );
 }
