@@ -1,0 +1,11 @@
+@use '../../index.scss' as colors;
+
+.counters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 0;
+  padding: 15px;
+  opacity: 1;
+}

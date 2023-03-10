@@ -3,11 +3,11 @@ import React from 'react';
 import { Button } from '../Button';
 import { TimerSwitch } from '../TimerSwitch';
 import { StatusLabel } from '../StatusLabel';
+import { Counters } from '../Counters';
 
 import { useInterval } from '../../hooks/useInterval';
 
 import './style.scss';
-import { reverse } from 'dns';
 
 type MainTimerProps = {
   chillTime: number;
@@ -103,6 +103,11 @@ export function MainTimer(props: MainTimerProps) {
         >
           Work
         </Button>
+        <Counters
+          totalChillingTime={totalChillingTime}
+          totalWorkingTime={totalWorkingTime}
+          reversePomodoros={reversePomodoros}
+        />
       </div>
     </>
   );
