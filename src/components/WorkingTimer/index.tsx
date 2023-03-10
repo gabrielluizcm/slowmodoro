@@ -7,11 +7,12 @@ import { useInterval } from '../../hooks/useInterval';
 
 import './style.scss';
 
-type ChillingTimerProps = {
+type WorkingTimerProps = {
   defaultTime: number;
+  long?: boolean;
 };
 
-export function ChillingTimer(props: ChillingTimerProps) {
+export function WorkingTimer(props: WorkingTimerProps) {
   const [defaultTime, setDefaultTime] = React.useState(props.defaultTime);
 
   useInterval(() => {
@@ -20,7 +21,7 @@ export function ChillingTimer(props: ChillingTimerProps) {
 
   return (
     <div className="pomodoro">
-      <h1 className="status">Chilling</h1>
+      <h1 className="status">{props.long ? 'Long work' : 'Short work'}</h1>
       <Timer currentTimer={defaultTime} />
       <Button onClick={() => console.log('chill')}>Chill</Button>
       <Button onClick={() => console.log('work')}>Work</Button>

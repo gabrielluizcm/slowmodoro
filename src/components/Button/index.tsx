@@ -3,7 +3,7 @@ import React from 'react';
 import './style.scss';
 
 type ButtonProps = {
-  text: string;
+  children: string;
   className?: string;
   onClick?: () => void;
 };
@@ -11,7 +11,7 @@ type ButtonProps = {
 export function Button(props: ButtonProps): JSX.Element {
   return (
     <button onClick={props.onClick} className={props.className}>
-      {props.text}
+      {props.children}
     </button>
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { ChillingTimer } from './components/ChillingTimer';
+// import { WorkingTimer } from './components/WorkingTimer';
 
 import './index.scss';
 
 function App() {
   return (
     <>
-      <h2>Reverse Pomodoro WIP</h2>
-      <ChillingTimer defaultTime={300} />
+      <ChillingTimer defaultTime={25 * 60} />
     </>
   );
 }
