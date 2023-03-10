@@ -1,3 +1,5 @@
+@use '../../index.scss' as colors;
+
 button {
   font-size: 2em;
   padding: 15px;
@@ -5,4 +7,6 @@ button {
   border-radius: 10px;
   box-shadow: none;
   border: none;
+  background-color: colors.$regularText;
+  color: colors.$regularBackground;
 }

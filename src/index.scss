@@ -1,8 +1,16 @@
+$regularBackground: #2c016d;
+$regularText: #e4e4e4;
+$chillingBackground: #ac73ff;
+$shortWorkBackground: #d7ad0d;
+$longWorkBackground: #c82b28;
+$blackText: #010101;
+
 * {
   margin: 0;
   padding: 0;
   outline: none;
   box-sizing: border-box;
+  color: $regularText;
 }
 
 html,
@@ -16,4 +24,5 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: $regularBackground;
 }

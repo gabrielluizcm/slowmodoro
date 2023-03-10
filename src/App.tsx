@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ChillingTimer } from './components/ChillingTimer';
 
-import './index.css';
+import './index.scss';
 
 function App() {
   return (
