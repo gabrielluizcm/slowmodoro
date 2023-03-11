@@ -21,3 +21,13 @@
     background-color: colors.$longWorkBackground;
   }
 }
+
+.pomodoro {
+  padding: 10px 20px;
+  background-color: colors.$glassBackground;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px #00000001;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid colors.$glassBorder;
+}
