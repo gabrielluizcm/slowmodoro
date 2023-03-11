@@ -27,7 +27,7 @@ export function MainTimer(props: MainTimerProps) {
   const [totalChillingTime, setTotalChillingTime] = React.useState(0);
   const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
 
-  const background = setBackground(status);
+  const background = setBackground(status, reversePomodoros);
   const times = {
     chillTime,
     workTime,
@@ -113,11 +113,13 @@ export function MainTimer(props: MainTimerProps) {
   );
 }
 
-const setBackground = (status: Status) => {
+const setBackground = (status: Status, reversePomodoros: number) => {
   let background = 'background';
 
   if (status === 'chilling') background += ' chillBackground';
-  else if (status === 'working') background += ' shortWorkBackground';
-
+  else if (status === 'working') {
+    if (reversePomodoros % 4 !== 0) background += ' shortWorkBackground';
+    else background += ' longWorkBackground';
+  }
   return background;
 };
