@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { MainTimer } from './components/MainTimer';
-// import { WorkingTimer } from './components/WorkingTimer';
+import { Footer } from './components/Footer';
 
 import './index.scss';
 
@@ -13,6 +13,7 @@ function App() {
         shortWorkTime={5 * 60}
         longWorkTime={15 * 60}
       />
+      <Footer />
     </>
   );
 }
