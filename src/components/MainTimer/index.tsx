@@ -118,8 +118,9 @@ const setBackground = (status: Status, reversePomodoros: number) => {
 
   if (status === 'chilling') background += ' chillBackground';
   else if (status === 'working') {
-    if (reversePomodoros % 4 !== 0) background += ' shortWorkBackground';
-    else background += ' longWorkBackground';
+    if (reversePomodoros && reversePomodoros % 4 === 0)
+      background += ' longWorkBackground';
+    else background += ' shortWorkBackground';
   }
   return background;
 };
