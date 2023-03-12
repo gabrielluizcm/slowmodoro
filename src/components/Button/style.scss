@@ -13,15 +13,15 @@ button {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
+  svg {
+    fill: colors.$regularBackground;
+  }
+
   &.active {
     background-color: colors.$activeButton;
 
-    &.chilling {
-      color: colors.$chillingBackground;
-    }
-
-    &.working {
-      color: colors.$shortWorkBackground;
+    svg {
+      fill: colors.$regularText;
     }
   }
 }

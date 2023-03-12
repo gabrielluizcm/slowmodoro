@@ -33,7 +33,37 @@ export function MainTimer(props: MainTimerProps) {
     workTime,
   };
 
+  const increaseAndCheckReversePomodoros = () => {
+    const newReversePomodoros = reversePomodoros + 1;
+    setReversePomodoros(newReversePomodoros);
+
+    // Using const instead of state to work around state change delay
+    if (newReversePomodoros % 4 === 0) setWorkTime(props.longWorkTime);
+  };
+
+  const resetChill = () => {
+    setChillTime(props.chillTime);
+    setPaused(false);
+    increaseAndCheckReversePomodoros();
+    setStatus('working');
+  };
+
+  const resetWork = () => {
+    setPaused(false);
+    setWorkTime(props.shortWorkTime);
+    setStatus('chilling');
+  };
+
   const handleChillButton = () => {
+    if (status === 'working')
+      if (
+        confirm(
+          'Are you sure you want to skip into chilling? Timers will be reset!'
+        )
+      )
+        return resetWork();
+      else return;
+
     if (status === 'chilling') setPaused(!paused);
     else setPaused(false);
 
@@ -41,6 +71,15 @@ export function MainTimer(props: MainTimerProps) {
   };
 
   const handleWorkButton = () => {
+    if (status === 'chilling')
+      if (
+        confirm(
+          'Are you sure you want to skip into working? Timers will be reset!'
+        )
+      )
+        return resetChill();
+      else return;
+
     if (status === 'working') setPaused(!paused);
     else setPaused(false);
 
@@ -50,21 +89,14 @@ export function MainTimer(props: MainTimerProps) {
   const checkChillTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (chillTime <= 1) {
-      const newReversePomodoros = reversePomodoros + 1;
-      setReversePomodoros(newReversePomodoros);
-      setStatus('working');
-      setChillTime(props.chillTime);
-
-      // Using const instead of state to work around state change delay
-      if (newReversePomodoros % 4 === 0) setWorkTime(props.longWorkTime);
+      resetChill();
     }
   };
 
   const checkWorkTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (workTime <= 1) {
-      setStatus('chilling');
-      setWorkTime(props.shortWorkTime);
+      resetWork();
     }
   };
 
@@ -90,6 +122,7 @@ export function MainTimer(props: MainTimerProps) {
         <StatusLabel status={status} reversePomodoros={reversePomodoros} />
         <TimerSwitch status={status} times={times} />
         <Button
+          status={status}
           onClick={handleChillButton}
           className={status === 'chilling' ? 'active chilling' : ''}
           paused={paused}
@@ -97,6 +130,7 @@ export function MainTimer(props: MainTimerProps) {
           Chill
         </Button>
         <Button
+          status={status}
           onClick={handleWorkButton}
           className={status === 'working' ? 'active working' : ''}
           paused={paused}
