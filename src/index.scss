@@ -29,3 +29,25 @@ body {
   justify-content: center;
   background: $regularBackground;
 }
+
+.logoImg {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1em;
+}
+
+#root,
+#logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#root {
+  height: 100%;
+  justify-content: space-around;
+}
+
+#logo {
+  justify-content: center;
+}
