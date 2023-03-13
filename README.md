@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+# Reverse Pomodoro Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
+Reverse Pomodoro ~~I still need a proper name~~, as the name suggests, it's a reverse implementation on the famous [Pomodoro Method](https://www.techtarget.com/whatis/definition/pomodoro-technique): instead of focusing for 25 minutes and relaxing for 5, you'll be chilling for 25 and working for 5.
+
+Everyone makes a pomodoro app when learning React, so I thought it would be interesting to make the opposite version, just to bring some extra fun to the project. Eventually I discovered an already existing reverse pomodoro app: [Doropomo](https://doropomo.app/) ~~a much better name, I know~~, and that this method actually works for some people, giving small motivation needed to escape from inertia or depression, or anything that makes it so hard to start the thing we want to do. You can read more about it [here](https://www.tiimoapp.com/blog/reverse-pomodoro-technique/) if you'd like.
+
+## Usage
+
+The app has a mobile-first interface, and boots up at the **"Idle"** status, letting you choose to start with either a 25-minute **chill** or a 5-minute **work**. After that, you'll notice the colors changing to match the selected option, and the active button becoming a **pause** one, in case you need to stop the timer, while the other button will turn into a **skip** button, if you're not feeling like completing that timer fully on that cycle. After four **chill** sessions, you'll be presented with a **long work** timer, counting down from 15 minutes instead of 5. That's about the basic functionality.
+
+Below the buttons you will find the **counters**: **total chill time**, **total work time**, and **how many reverse pomodoros _(chill time)_** you've done currently **(skipped chills also count towards this counter)**.
+
+## Updates
+
+There are some features I want to develop but aren't still present in the current version *(v1.0)*, but will be added on the following weeks. Planned updates are:
+- Addition of sound effects
+- Customizable times
+
+
+
+# Nerd stuff
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the typescript template. Build and publishing made to [Vercel](https://vercel.com), and current release can be found [at this link](https://reverse-pomodoro.vercel.app/).
+
+## React README starts here vv
 
 ## Available Scripts
 
