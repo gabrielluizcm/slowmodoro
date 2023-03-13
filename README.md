@@ -28,7 +28,7 @@ There are some features I want to develop but aren't still present in the curren
 # Nerd stuff
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the typescript template. Build and publishing made to [Vercel](https://vercel.com), and current release can be found [at this link](https://reverse-pomodoro.vercel.app/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the typescript template. Build and publishing made to [Vercel](https://vercel.com), and current release can be found [at this link](https://slowmodoro.vercel.app/).
 
 ## React README starts here vv
 
