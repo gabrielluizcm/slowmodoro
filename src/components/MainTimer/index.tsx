@@ -6,6 +6,7 @@ import { StatusLabel } from '../StatusLabel';
 import { Counters } from '../Counters';
 
 import { useInterval } from '../../hooks/useInterval';
+import { secondsToTime } from '../../utils/secondsToTime';
 
 import './style.scss';
 
@@ -100,6 +101,19 @@ export function MainTimer(props: MainTimerProps) {
     }
   };
 
+  // Timer on tab is 1 second late when not paused, will try to fix eventually
+  const updateTabTitle = () => {
+    let title = 'Slowmodoro - a reverse Pomodoro';
+
+    if (status === 'chilling') title = `Chilling - ${secondsToTime(chillTime)}`;
+    else if (status === 'working')
+      title = `Working - ${secondsToTime(workTime)}`;
+
+    if (paused) title = `PAUSED | ${title}`;
+
+    document.title = title;
+  };
+
   useInterval(() => {
     if (!paused) {
       if (status === 'chilling') {
@@ -113,6 +127,7 @@ export function MainTimer(props: MainTimerProps) {
         checkWorkTimeLeft();
       }
     }
+    updateTabTitle();
   }, 1000);
 
   return (

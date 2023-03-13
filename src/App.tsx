@@ -13,9 +13,10 @@ function App() {
         <img
           className="logoImg"
           src={reversePomodoroImg}
-          alt="Reverse Pomodoro logo"
+          alt="Slowmodoro logo"
         />
-        <h1>Reverse Pomodoro</h1>
+        <h1>Slowmodoro</h1>
+        <h3>a reverse Pomodoro app</h3>
       </div>
       <MainTimer
         chillTime={25 * 60}

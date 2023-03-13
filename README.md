@@ -1,11 +1,11 @@
-# Reverse Pomodoro Web App
+# Slowmodoro - a reverse Pomodoro web app
 
 ## About
-Reverse Pomodoro ~~I still need a proper name~~, as the name suggests, it's a reverse implementation on the famous [Pomodoro Method](https://www.techtarget.com/whatis/definition/pomodoro-technique): instead of focusing for 25 minutes and relaxing for 5, you'll be chilling for 25 and working for 5.
+**Slowmodoro** is a reverse implementation on the famous [Pomodoro Method](https://www.techtarget.com/whatis/definition/pomodoro-technique): instead of focusing for 25 minutes and relaxing for 5, you'll be chilling for 25 and working for 5. Can't focus for long? No problem, **take it slow** with Slowmodoro!
 
 Everyone makes a pomodoro app when learning React, so I thought it would be interesting to make the opposite version, just to bring some extra fun to the project. Eventually I discovered an already existing reverse pomodoro app: [Doropomo](https://doropomo.app/) ~~a much better name, I know~~, and that this method actually works for some people, giving small motivation needed to escape from inertia or depression, or anything that makes it so hard to start the thing we want to do. You can read more about it [here](https://www.tiimoapp.com/blog/reverse-pomodoro-technique/) if you'd like.
-
 ## Usage
+<img style="float: left; height: 300px; margin-right: 10px; border-radius: 15px" src="public/demo.gif" />
 
 The app has a mobile-first interface, and boots up at the **"Idle"** status, letting you choose to start with either a 25-minute **chill** or a 5-minute **work**. After that, you'll notice the colors changing to match the selected option, and the active button becoming a **pause** one, in case you need to stop the timer, while the other button will turn into a **skip** button, if you're not feeling like completing that timer fully on that cycle. After four **chill** sessions, you'll be presented with a **long work** timer, counting down from 15 minutes instead of 5. That's about the basic functionality.
 
@@ -13,11 +13,17 @@ Below the buttons you will find the **counters**: **total chill time**, **total 
 
 ## Updates
 
-There are some features I want to develop but aren't still present in the current version *(v1.0)*, but will be added on the following weeks. Planned updates are:
+There are some features I want to develop but aren't still present in the current version, but will be added on the following weeks. Planned updates include, but are not limited to:
 - Addition of sound effects
-- Customizable times
+- Customizable timers
+- PT-BR translation
 
-
+### Changelog
+-  v1.1:
+    - Defined **_Slowmodoro_** as app name;
+    - Resized logo and main box;
+    - Tab title updates to match current status and timer;
+    - Added demo *.gif* to **Usage** section on README;
 
 # Nerd stuff
 
