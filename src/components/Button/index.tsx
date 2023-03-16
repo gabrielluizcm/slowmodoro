@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaPause, FaPlay, FaStepForward } from 'react-icons/fa';
 
-import { Status } from '../MainTimer';
+import { StatusContext, PausedContext } from '../App';
 
 import './style.scss';
 
 type ButtonProps = {
-  status: Status;
   children: string;
   className: string;
-  paused: boolean;
   onClick?: () => void;
 };
 
 export function Button(props: ButtonProps): JSX.Element {
+  const status = useContext(StatusContext);
+  const paused = useContext(PausedContext);
+
   return (
     <button onClick={props.onClick} className={props.className}>
       {props.className.includes('active') ? (
-        props.paused ? (
+        paused ? (
           <FaPlay />
         ) : (
           <FaPause />
         )
-      ) : props.status === 'idle' ? (
+      ) : status === 'idle' ? (
         props.children
       ) : (
         <FaStepForward />
