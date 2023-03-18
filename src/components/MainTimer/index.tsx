@@ -9,6 +9,12 @@ import { StatusLabel } from '../StatusLabel';
 import { useInterval } from '../../hooks/useInterval';
 import { secondsToTime } from '../../utils/secondsToTime';
 
+import timerStartClick from '../../sounds/timerStart.mp3';
+import timerResumeClick from '../../sounds/timerResume.mp3';
+import timerPauseClick from '../../sounds/timerPause.mp3';
+import startChillAlert from '../../sounds/startChillAlert.mp3';
+import startWorkAlert from '../../sounds/startWorkAlert.mp3';
+
 type MainTimerProps = {
   chillTime: number;
   shortWorkTime: number;
@@ -57,18 +63,33 @@ export function MainTimer(props: MainTimerProps) {
     props.setStatus('chilling');
   };
 
+  const startTimer = () => {
+    new Audio(timerStartClick).play();
+    props.setPaused(false);
+  };
+
+  const timerPauseSwitch = () => {
+    let audio = new Audio(timerResumeClick);
+
+    if (!paused) audio = new Audio(timerPauseClick);
+
+    audio.play();
+    props.setPaused(!paused);
+  };
+
   const handleChillButton = () => {
     if (status === 'working')
       if (
         confirm(
           'Are you sure you want to skip into chilling? Timers will be reset!'
         )
-      )
+      ) {
+        startTimer();
         return resetWork();
-      else return;
+      } else return;
 
-    if (status === 'chilling') props.setPaused(!paused);
-    else props.setPaused(false);
+    if (status === 'chilling') timerPauseSwitch();
+    else startTimer();
 
     props.setStatus('chilling');
   };
@@ -79,12 +100,13 @@ export function MainTimer(props: MainTimerProps) {
         confirm(
           'Are you sure you want to skip into working? Timers will be reset!'
         )
-      )
+      ) {
+        startTimer();
         return resetChill();
-      else return;
+      } else return;
 
-    if (status === 'working') props.setPaused(!paused);
-    else props.setPaused(false);
+    if (status === 'working') timerPauseSwitch();
+    else startTimer();
 
     props.setStatus('working');
   };
@@ -92,6 +114,7 @@ export function MainTimer(props: MainTimerProps) {
   const checkChillTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (chillTime <= 1) {
+      new Audio(startWorkAlert).play();
       resetChill();
     }
   };
@@ -99,6 +122,7 @@ export function MainTimer(props: MainTimerProps) {
   const checkWorkTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (workTime <= 1) {
+      new Audio(startChillAlert).play();
       resetWork();
     }
   };
