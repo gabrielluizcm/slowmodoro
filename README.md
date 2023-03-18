@@ -14,16 +14,18 @@ Below the buttons you will find the **counters**: **total chill time**, **total 
 ## Updates
 
 There are some features I want to develop but aren't still present in the current version, but will be added on the following weeks. Planned updates include, but are not limited to:
-- Addition of sound effects
 - Customizable timers
 - PT-BR translation
 
 ### Changelog
--  v1.1:
-    - Defined **_Slowmodoro_** as app name;
-    - Resized logo and main box;
-    - Tab title updates to match current status and timer;
-    - Added demo *.gif* to **Usage** section on README;
+- v1.1:
+  - Defined **_Slowmodoro_** as app name;
+  - Resized logo and main box;
+  - Tab title updates to match current status and timer;
+  - Added demo *.gif* to **Usage** section on README;
+- v1.2:
+  - Reorganized code;
+  - Added sound effects to button clicks and alarms when timers end;
 
 # Nerd stuff
 
