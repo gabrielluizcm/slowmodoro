@@ -162,13 +162,25 @@ export function MainTimer(props: MainTimerProps) {
       <TimerSwitch status={status} times={times} />
       <Button
         onClick={handleChillButton}
-        className={status === 'chilling' ? 'active chilling' : ''}
+        className={
+          status === 'chilling'
+            ? paused
+              ? 'active paused chilling'
+              : 'active chilling'
+            : ''
+        }
       >
         Chill
       </Button>
       <Button
         onClick={handleWorkButton}
-        className={status === 'working' ? 'active working' : ''}
+        className={
+          status === 'working'
+            ? paused
+              ? 'active paused chilling'
+              : 'active chilling'
+            : ''
+        }
       >
         Work
       </Button>

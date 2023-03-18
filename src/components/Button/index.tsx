@@ -17,17 +17,19 @@ export function Button(props: ButtonProps): JSX.Element {
 
   return (
     <button onClick={props.onClick} className={props.className}>
-      {props.className.includes('active') ? (
-        paused ? (
-          <FaPlay />
+      <span className="buttonFace">
+        {props.className.includes('active') ? (
+          paused ? (
+            <FaPlay />
+          ) : (
+            <FaPause />
+          )
+        ) : status === 'idle' ? (
+          props.children
         ) : (
-          <FaPause />
-        )
-      ) : status === 'idle' ? (
-        props.children
-      ) : (
-        <FaStepForward />
-      )}
+          <FaStepForward />
+        )}
+      </span>
     </button>
   );
 }

@@ -2,13 +2,11 @@
 
 button {
   font-size: 2em;
-  padding: 15px;
   width: 150px;
   border-radius: 10px;
   box-shadow: none;
   border: none;
-  background-color: colors.$regularText;
-  color: colors.$regularBackground;
+  background-color: darken(colors.$regularText, 5%);
   margin: 0 10px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -17,11 +15,39 @@ button {
     fill: colors.$regularBackground;
   }
 
-  &.active {
-    background-color: colors.$activeButton;
+  .buttonFace {
+    display: inline-block;
+    width: 150px;
+    height: 68.3px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: colors.$regularText;
+    color: colors.$regularBackground;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
 
     svg {
-      fill: colors.$regularText;
+      fill: colors.$regularBackground;
+    }
+  }
+
+  &.active {
+    background-color: darken(colors.$activeButton, 5%);
+
+    .buttonFace {
+      background-color: colors.$activeButton;
+      color: colors.$regularText;
+      transform: translateY(-5px);
+
+      svg {
+        fill: colors.$regularText;
+      }
+    }
+
+    &.paused {
+      .buttonFace {
+        transform: translateY(-10px);
+      }
     }
   }
 }
