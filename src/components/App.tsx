@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 
 import { Logo } from './Logo/Logo';
+import { Menu } from './Menu';
 import { MainTimer } from './MainTimer';
 import { Counters } from './Counters';
 import { Footer } from './Footer';
@@ -16,6 +17,9 @@ export const ReversePomodorosContext = createContext(0);
 function App() {
   const [status, setStatus] = React.useState<Status>('idle');
   const [paused, setPaused] = React.useState(false);
+  const [startChillTime, setStartChillTime] = React.useState(25 * 60);
+  const [startShortWorkTime, setStartShortWorkTime] = React.useState(5 * 60);
+  const [startLongWorkTime, setStartLongWorkTime] = React.useState(15 * 60);
   const [reversePomodoros, setReversePomodoros] = React.useState(0);
   const [totalChillingTime, setTotalChillingTime] = React.useState(0);
   const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
@@ -34,14 +38,15 @@ function App() {
     <>
       <div className={background} />
       <Logo />
+      <Menu />
       <div className="pomodoro">
         <StatusContext.Provider value={status}>
           <PausedContext.Provider value={paused}>
             <ReversePomodorosContext.Provider value={reversePomodoros}>
               <MainTimer
-                chillTime={25 * 60}
-                shortWorkTime={5 * 60}
-                longWorkTime={15 * 60}
+                chillTime={startChillTime}
+                shortWorkTime={startShortWorkTime}
+                longWorkTime={startLongWorkTime}
                 setStatus={setStatus}
                 setPaused={setPaused}
                 setReversePomodoros={setReversePomodoros}
