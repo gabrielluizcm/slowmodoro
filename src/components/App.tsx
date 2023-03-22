@@ -51,7 +51,6 @@ function App() {
               <Counters
                 totalChillingTime={totalChillingTime}
                 totalWorkingTime={totalWorkingTime}
-                reversePomodoros={reversePomodoros}
               />
             </ReversePomodorosContext.Provider>
           </PausedContext.Provider>
