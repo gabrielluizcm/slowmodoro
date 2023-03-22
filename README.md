@@ -14,7 +14,7 @@ Below the buttons you will find the **counters**: **total chill time**, **total 
 ## Updates
 
 There are some features I want to develop but aren't still present in the current version, but will be added on the following weeks. Planned updates include, but are not limited to:
-- Customizable timers
+- Customizable timers **(currently working on this one)**
 - PT-BR translation
 
 ### Changelog
