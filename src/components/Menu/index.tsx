@@ -7,14 +7,22 @@ import './style.scss';
 
 export function Menu() {
   const [opened, setOpened] = useState(false);
+  const [menuClass, setMenuClass] = useState('');
+
+  const handleIconClick = () => {
+    setMenuClass(opened ? 'closing' : 'opening');
+    const newOpened = !opened;
+    setOpened(newOpened);
+    setTimeout(() => setMenuClass(newOpened ? 'opened' : ''), 300);
+  };
 
   return (
     <>
-      <div id="menuButton" onClick={() => setOpened(!opened)}>
-        <FaBars />
+      <div id="menuBackground" className={menuClass}>
+        <FaBars onClick={handleIconClick} />
       </div>
 
-      {opened ? <MenuModal closeModal={() => setOpened(false)} /> : false}
+      {/* {opened ? <MenuModal closeModal={() => setOpened(false)} /> : false} */}
     </>
   );
 }

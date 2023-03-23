@@ -1,8 +1,43 @@
-#menuButton {
+@use '../../index.scss' as colors;
+
+#menuBackground {
   position: absolute;
   top: 0;
   left: 0;
   margin: 15px;
-  font-size: 2em;
+  font-size: 1.5em;
   cursor: pointer;
+  background-color: colors.$activeButton;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border-radius: 50px;
+
+  &.opening {
+    animation: openMenu .3s forwards ease-out;
+  }
+
+  &.closing {
+    animation: openMenu .3s forwards reverse ease-in;
+  }
+
+  &.opened {
+    height: 5em;
+  }
+}
+
+@keyframes openMenu {
+  0% {
+    height: 50px;
+  }
+
+  5% {
+    height: 2.5em;
+  }
+
+  100% {
+    height: 5em;
+  }
 }
