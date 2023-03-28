@@ -1,9 +1,18 @@
 @use '../../index.scss' as colors;
 
+hr {
+  width: 100%;
+  border-radius: 100% 5px;
+  border-color: colors.$activeButton;
+}
+
+#menuIcon,
 #menuBackground {
   position: absolute;
   top: 0;
   left: 0;
+  width: 2em;
+  height: 2em;
   margin: 15px;
   font-size: 1.5em;
   cursor: pointer;
@@ -14,6 +23,16 @@
   justify-content: flex-start;
   padding: 10px;
   border-radius: 50px;
+  z-index: 999;
+}
+
+#menuBackground {
+  z-index: 998;
+  justify-content: flex-end;
+
+  svg:first-child {
+    margin-bottom: 0.5em;
+  }
 
   &.opening {
     animation: openMenu .3s forwards ease-out;
@@ -24,20 +43,20 @@
   }
 
   &.opened {
-    height: 5em;
+    height: 5.5em;
   }
 }
 
 @keyframes openMenu {
   0% {
-    height: 50px;
+    height: 2em;
   }
 
-  5% {
-    height: 2.5em;
+  50% {
+    height: 4em;
   }
 
   100% {
-    height: 5em;
+    height: 5.5em;
   }
 }
