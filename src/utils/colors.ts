@@ -3,13 +3,13 @@ const colors = {
   glassBackground: '#51d6ca99',
   glassBorder: '#51d6ca',
   regularText: '#e4e4e4',
-  darkenedRegularText: '#c2c2c2',
+  darkenedRegularText: '#d3d3d3',
   chillingBackground: '#ac73ff',
   shortWorkBackground: '#d7ad0d',
   longWorkBackground: '#c82b28',
   blackText: '#010101',
   activeButton: '#5f22d9',
-  darkenedActiveButton: '#3d00b7',
+  darkenedActiveButton: '#4e11c8',
 };
 
 export default colors;

@@ -18,6 +18,10 @@ const StyledFooter = styled.footer`
 const GitLinks = styled.p`
   font-size: 2em;
 
+  svg {
+    color: ${colors.regularText};
+  }
+
   a {
     margin: 0 10px;
   }
