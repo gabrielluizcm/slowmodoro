@@ -14,6 +14,7 @@ const StyledHeader = styled.h2`
 const Copyright = styled.span`
   position: absolute;
   bottom: 15px;
+  text-align: center;
 `;
 
 export { Copyright, StyledHeader };

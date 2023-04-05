@@ -37,7 +37,7 @@ const StyledMenuDrawer = styled(StyledMenu)`
 `;
 
 const Hr = styled.hr`
-  width: 500px;
+  width: 350px;
   border-radius: 100% 5px;
   border-color: ${colors.activeButton};
   margin: 10px 0;

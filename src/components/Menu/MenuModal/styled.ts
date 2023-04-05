@@ -19,6 +19,11 @@ const ModalContent = styled.div`
       margin-left: 10px;
     }
   }
+
+  a,
+  a:visited {
+    color: ${colors.regularText};
+  }
 `;
 
 type BackShadowProps = {
