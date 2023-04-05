@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 
 type BackgroundProps = {
   status: Status;
+  paused: boolean;
   longWork: boolean;
 };
 
@@ -33,7 +34,8 @@ const Background = styled.div`
   z-index: -1;
   transition: all 0.3s ease-in-out;
   background-color: ${(props: BackgroundProps) => {
-    const { status, longWork } = props;
+    const { status, paused, longWork } = props;
+    if (paused) return colors.regularBackground;
     if (status === 'chilling') return colors.chillingBackground;
     else if (status === 'working')
       if (longWork) return colors.longWorkBackground;

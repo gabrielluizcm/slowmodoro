@@ -37,6 +37,7 @@ function App() {
     <Wrapper>
       <Background
         status={status}
+        paused={paused}
         longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
       />
       <Logo />
