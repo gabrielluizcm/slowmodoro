@@ -14,7 +14,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   svg {
-    fill: colors.$regularBackground;
+    fill: ${colors.regularBackground};
   }
 `;
 

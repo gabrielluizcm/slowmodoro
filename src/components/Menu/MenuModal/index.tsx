@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMinus } from 'react-icons/fa';
 
-import './style.scss';
+import { BackShadow, Content, CloseModal } from './styled';
 
 type MenuModalProps = {
-  children: JSX.Element;
   closeModal: () => void;
+  opened: boolean;
+  children: JSX.Element;
 };
 
 export function MenuModal(props: MenuModalProps) {
   return (
     <>
-      <div className="backShadow" onClick={props.closeModal} />
-      <div className="content">
-        <div className="closeModal" onClick={props.closeModal}>
+      <BackShadow onClick={props.closeModal} opened={props.opened} />
+      <Content opened={props.opened}>
+        <CloseModal onClick={props.closeModal}>
           <FaMinus />
-        </div>
+        </CloseModal>
         {props.children}
-      </div>
+      </Content>
     </>
   );
 }

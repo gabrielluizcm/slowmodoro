@@ -10,6 +10,7 @@ const colors = {
   blackText: '#010101',
   activeButton: '#5f22d9',
   darkenedActiveButton: '#4e11c8',
+  backShadow: '#0a0a0a88',
 };
 
 export default colors;
