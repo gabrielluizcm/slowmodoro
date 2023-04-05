@@ -25,8 +25,6 @@ function App() {
   const [totalChillingTime, setTotalChillingTime] = React.useState(0);
   const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
 
-  const background = setBackground(status, reversePomodoros);
-
   const increaseTotalChillingTime = () => {
     setTotalChillingTime(totalChillingTime + 1);
   };
@@ -42,7 +40,18 @@ function App() {
         longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
       />
       <Logo />
-      <Menu />
+      <Menu
+        chillTime={startChillTime / 60}
+        shortWorkTime={startShortWorkTime / 60}
+        longWorkTime={startLongWorkTime / 60}
+        setChillTime={(minutes: number) => setStartChillTime(minutes * 60)}
+        setShortWorkTime={(minutes: number) =>
+          setStartShortWorkTime(minutes * 60)
+        }
+        setLongWorkTime={(minutes: number) =>
+          setStartLongWorkTime(minutes * 60)
+        }
+      />
       <PomodoroContainer>
         <StatusContext.Provider value={status}>
           <PausedContext.Provider value={paused}>
@@ -69,17 +78,5 @@ function App() {
     </Wrapper>
   );
 }
-
-const setBackground = (status: Status, reversePomodoros: number) => {
-  let background = 'background';
-
-  if (status === 'chilling') background += ' chillBackground';
-  else if (status === 'working') {
-    if (reversePomodoros && reversePomodoros % 4 === 0)
-      background += ' longWorkBackground';
-    else background += ' shortWorkBackground';
-  }
-  return background;
-};
 
 export default App;

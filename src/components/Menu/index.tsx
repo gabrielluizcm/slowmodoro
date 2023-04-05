@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
-import { FaBars, FaCog, FaInfo, FaLink } from 'react-icons/fa';
+import { FaBars, FaCog, FaInfo } from 'react-icons/fa';
 
 import { MenuModal } from './MenuModal';
+import InfoModal from './MenuModal/InfoModal';
+import SettingsModal from './MenuModal/SettingsModal';
 
-import { StyledMenu, StyledMenuDrawer, Hr, Copyright } from './styled';
+import { StyledMenu, StyledMenuDrawer } from './styled';
 
-export function Menu() {
+type MenuProps = {
+  chillTime: number;
+  shortWorkTime: number;
+  longWorkTime: number;
+  setChillTime: (minutes: number) => void;
+  setShortWorkTime: (minutes: number) => void;
+  setLongWorkTime: (minutes: number) => void;
+};
+
+export function Menu(props: MenuProps) {
   const [opened, setOpened] = useState(false);
   const [transition, setTransition] = useState('none');
   const [modalCogOpen, setModalCogOpen] = useState(false);
@@ -42,43 +53,20 @@ export function Menu() {
         closeModal={() => setModalCogOpen(false)}
         opened={modalCogOpen}
       >
-        <>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-          aperiam ipsum animi perspiciatis asperiores dignissimos error, neque
-          esse laudantium sequi voluptate itaque dolorem vitae praesentium
-          reiciendis. Quos eligendi illo repudiandae.
-        </>
+        <SettingsModal
+          chillTime={props.chillTime}
+          shortWorkTime={props.shortWorkTime}
+          longWorkTime={props.longWorkTime}
+          setChillTime={props.setChillTime}
+          setShortWorkTime={props.setShortWorkTime}
+          setLongWorkTime={props.setLongWorkTime}
+        />
       </MenuModal>
       <MenuModal
         closeModal={() => setModalInfoOpen(false)}
         opened={modalInfoOpen}
       >
-        <>
-          <a
-            href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
-            title="Pomodoro Technique page on Wikipedia"
-          >
-            <FaLink />
-            What is the Pomodoro Technique?
-          </a>
-          <Hr />
-          <a
-            href="https://www.tiimoapp.com/blog/reverse-pomodoro-technique/"
-            title="Reverse Pomodoro Article on TiimoApp"
-          >
-            <FaLink />
-            About the Reverse Pomodoro Technique
-          </a>
-          <Copyright>
-            <a
-              href="https://www.flaticon.com/free-icons/pomodoro"
-              title="Pomodoro Icons on Flaticon"
-            >
-              <FaLink />
-              Pomodoro icon created by Freepik - Flaticon using online editor
-            </a>
-          </Copyright>
-        </>
+        <InfoModal />
       </MenuModal>
     </>
   );

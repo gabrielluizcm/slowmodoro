@@ -1,6 +1,26 @@
 import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
+const ModalContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: inherit;
+    margin-bottom: 20px;
+
+    svg {
+      margin-left: 10px;
+    }
+  }
+`;
+
 type BackShadowProps = {
   onClick: () => void;
   opened: boolean;
@@ -69,4 +89,4 @@ const CloseModal = styled.div`
   margin-bottom: 20px;
 `;
 
-export { BackShadow, Content, CloseModal };
+export { ModalContent, BackShadow, Content, CloseModal };

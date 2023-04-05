@@ -37,15 +37,10 @@ const StyledMenuDrawer = styled(StyledMenu)`
 `;
 
 const Hr = styled.hr`
-  width: 100%;
+  width: 500px;
   border-radius: 100% 5px;
   border-color: ${colors.activeButton};
   margin: 10px 0;
 `;
 
-const Copyright = styled.span`
-  position: absolute;
-  bottom: 15px;
-`;
-
-export { StyledMenu, StyledMenuDrawer, Hr, Copyright };
+export { StyledMenu, StyledMenuDrawer, Hr };
