@@ -1,7 +1,14 @@
 import React from 'react';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
-import { InputWrapper, InputLabel, StyledInput } from './styled';
+import {
+  InputWrapper,
+  InputLabel,
+  NumberInputWrapper,
+  NumberInputDisplay,
+  NumberInputIncrease,
+  NumberInputDecrease,
+} from './styled';
 import { ModalContent } from '../styled';
 
 type SettingsModalProps = {
@@ -13,7 +20,44 @@ type SettingsModalProps = {
   setLongWorkTime: (minutes: number) => void;
 };
 
+type NumberInputProps = {
+  label: string;
+  value: number;
+  onIncreaseClick: () => void;
+  onDecreaseClick: () => void;
+};
+
+type HandleControlProps = {
+  minutes: number;
+  callback: (minutes: number) => void;
+};
+
+function NumberInput(props: NumberInputProps) {
+  return (
+    <NumberInputWrapper>
+      <h4>{props.label}</h4>
+      <NumberInputIncrease onClick={props.onIncreaseClick}>
+        +
+      </NumberInputIncrease>
+      <NumberInputDisplay>{props.value}</NumberInputDisplay>
+      <NumberInputDecrease onClick={props.onDecreaseClick}>
+        -
+      </NumberInputDecrease>
+    </NumberInputWrapper>
+  );
+}
+
 export default function SettingsModal(props: SettingsModalProps) {
+  const handleIncrease = (handleProps: HandleControlProps) => {
+    if (handleProps.minutes === 59) return;
+    handleProps.callback(handleProps.minutes + 1);
+  };
+
+  const handleDecrease = (handleProps: HandleControlProps) => {
+    if (handleProps.minutes === 1) return;
+    handleProps.callback(handleProps.minutes - 1);
+  };
+
   const handleSwapChillShort = () => {
     const temp = props.shortWorkTime;
     props.setShortWorkTime(props.chillTime);
@@ -33,28 +77,55 @@ export default function SettingsModal(props: SettingsModalProps) {
       </h2>
       <InputLabel>Timers (minutes)</InputLabel>
       <InputWrapper>
-        <StyledInput
-          type="number"
-          min={0}
-          max={59}
+        <NumberInput
+          label="Chilling"
           value={props.chillTime}
-          onChange={(e) => props.setChillTime(parseInt(e.target.value))}
+          onIncreaseClick={() =>
+            handleIncrease({
+              minutes: props.chillTime,
+              callback: (minutes) => props.setChillTime(minutes),
+            })
+          }
+          onDecreaseClick={() =>
+            handleDecrease({
+              minutes: props.chillTime,
+              callback: (minutes) => props.setChillTime(minutes),
+            })
+          }
         />
         <FaExchangeAlt onClick={handleSwapChillShort} />
-        <StyledInput
-          type="number"
-          min={0}
-          max={59}
+        <NumberInput
+          label="Short Work"
           value={props.shortWorkTime}
-          onChange={(e) => props.setShortWorkTime(parseInt(e.target.value))}
+          onIncreaseClick={() =>
+            handleIncrease({
+              minutes: props.shortWorkTime,
+              callback: (minutes) => props.setShortWorkTime(minutes),
+            })
+          }
+          onDecreaseClick={() =>
+            handleDecrease({
+              minutes: props.shortWorkTime,
+              callback: (minutes) => props.setShortWorkTime(minutes),
+            })
+          }
         />
         <FaExchangeAlt onClick={handleSwapShortLong} />
-        <StyledInput
-          type="number"
-          min={0}
-          max={59}
+        <NumberInput
+          label="LongWork"
           value={props.longWorkTime}
-          onChange={(e) => props.setLongWorkTime(parseInt(e.target.value))}
+          onIncreaseClick={() =>
+            handleIncrease({
+              minutes: props.longWorkTime,
+              callback: (minutes) => props.setLongWorkTime(minutes),
+            })
+          }
+          onDecreaseClick={() =>
+            handleDecrease({
+              minutes: props.longWorkTime,
+              callback: (minutes) => props.setLongWorkTime(minutes),
+            })
+          }
         />
       </InputWrapper>
     </ModalContent>
