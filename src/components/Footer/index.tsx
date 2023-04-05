@@ -2,12 +2,12 @@ import React from 'react';
 
 import { FaGithub, FaGithubAlt } from 'react-icons/fa';
 
-import './style.scss';
+import { StyledFooter, GitLinks } from './styled';
 
 export function Footer() {
   return (
-    <footer>
-      <p className="gitLinks">
+    <StyledFooter>
+      <GitLinks>
         <a
           href="https://github.com/gabrielluizcm"
           target="_blank"
@@ -22,7 +22,7 @@ export function Footer() {
         >
           <FaGithub />
         </a>
-      </p>
+      </GitLinks>
       <p>
         Made with joy by{' '}
         <a
@@ -33,6 +33,6 @@ export function Footer() {
           Gabriel Luiz
         </a>
       </p>
-    </footer>
+    </StyledFooter>
   );
 }

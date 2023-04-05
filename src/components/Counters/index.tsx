@@ -4,7 +4,7 @@ import { ReversePomodorosContext } from '../App';
 
 import { secondsToTime } from '../../utils/secondsToTime';
 
-import './style.scss';
+import { StyledCounters } from './styled';
 
 type CountersProps = {
   totalChillingTime: number;
@@ -15,7 +15,7 @@ export function Counters(props: CountersProps) {
   const reversePomodoros = useContext(ReversePomodorosContext);
 
   return (
-    <div className="counters">
+    <StyledCounters>
       <p>
         <b>Total chilling time:</b> {secondsToTime(props.totalChillingTime)}
       </p>
@@ -25,6 +25,6 @@ export function Counters(props: CountersProps) {
       <p>
         <b>Reverse Pomodoros:</b> {reversePomodoros}
       </p>
-    </div>
+    </StyledCounters>
   );
 }

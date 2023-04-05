@@ -1,12 +1,13 @@
 import React, { createContext } from 'react';
 
-import { Logo } from './Logo/Logo';
-import { Menu } from './Menu';
-import { MainTimer } from './MainTimer';
-import { Counters } from './Counters';
-import { Footer } from './Footer';
+import { Logo } from '../Logo';
+import { Menu } from '../Menu';
+import { MainTimer } from '../MainTimer';
+import { Counters } from '../Counters';
+import { Footer } from '../Footer';
 
-import '../index.scss';
+import '../../index.scss';
+import { Wrapper, Background, PomodoroContainer } from './styled';
 
 export type Status = 'idle' | 'chilling' | 'working';
 
@@ -35,11 +36,14 @@ function App() {
   };
 
   return (
-    <>
-      <div className={background} />
+    <Wrapper>
+      <Background
+        status={status}
+        longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
+      />
       <Logo />
       <Menu />
-      <div className="pomodoro">
+      <PomodoroContainer>
         <StatusContext.Provider value={status}>
           <PausedContext.Provider value={paused}>
             <ReversePomodorosContext.Provider value={reversePomodoros}>
@@ -60,9 +64,9 @@ function App() {
             </ReversePomodorosContext.Provider>
           </PausedContext.Provider>
         </StatusContext.Provider>
-      </div>
+      </PomodoroContainer>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
 

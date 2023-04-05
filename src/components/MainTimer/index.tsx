@@ -160,28 +160,10 @@ export function MainTimer(props: MainTimerProps) {
     <>
       <StatusLabel status={status} reversePomodoros={reversePomodoros} />
       <TimerSwitch status={status} times={times} />
-      <Button
-        onClick={handleChillButton}
-        className={
-          status === 'chilling'
-            ? paused
-              ? 'active paused chilling'
-              : 'active chilling'
-            : ''
-        }
-      >
+      <Button onClick={handleChillButton} active={status === 'chilling'}>
         Chill
       </Button>
-      <Button
-        onClick={handleWorkButton}
-        className={
-          status === 'working'
-            ? paused
-              ? 'active paused chilling'
-              : 'active chilling'
-            : ''
-        }
-      >
+      <Button onClick={handleWorkButton} active={status === 'working'}>
         Work
       </Button>
     </>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Status } from '../MainTimer';
 
-import './style.scss';
+import { StyledStatus } from './styled';
 
 type StatusLabelProps = {
   status: Status;
@@ -18,7 +18,7 @@ export function StatusLabel(props: StatusLabelProps) {
   )
     status = 'Long Working';
 
-  return <h1 className="status">{status}</h1>;
+  return <StyledStatus>{status}</StyledStatus>;
 }
 
 const firstCapital = (string: string) => {
