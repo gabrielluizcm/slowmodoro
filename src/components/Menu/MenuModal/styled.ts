@@ -1,15 +1,6 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
 type BackShadowProps = {
   onClick: () => void;
   opened: boolean;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaMinus } from 'react-icons/fa';
 
 import { BackShadow, Content, CloseModal } from './styled';

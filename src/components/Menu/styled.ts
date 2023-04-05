@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import colors from '../../utils/colors';
 
 const StyledMenu = styled.div`
@@ -25,30 +25,11 @@ type MenuDrawerProps = {
   transition: string;
 };
 
-const openMenu = keyframes`
-  from {
-    height: 2em;
-  }
-
-  to {
-    height: 5.5em;
-  }
-`;
-
 const StyledMenuDrawer = styled(StyledMenu)`
   z-index: 998;
   justify-content: flex-end;
+  transition: height 0.3s ease-in-out;
   height: ${(props: MenuDrawerProps) => (props.opened ? '5.5em' : '50px')};
-  animation: ${(props: MenuDrawerProps) =>
-    props.transition !== 'none'
-      ? props.transition === 'opening'
-        ? css`
-            ${openMenu} .3s forwards ease-out
-          `
-        : css`
-            ${openMenu} .3s forwards reverse ease-out
-          `
-      : 'none'};
 
   svg:first-child {
     margin-bottom: 0.5em;
