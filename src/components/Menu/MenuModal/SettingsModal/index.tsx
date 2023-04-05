@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCog, FaExchangeAlt } from 'react-icons/fa';
+import { FaCog, FaExchangeAlt, FaPlus, FaMinus } from 'react-icons/fa';
 
 import {
   InputWrapper,
@@ -37,11 +37,11 @@ function NumberInput(props: NumberInputProps) {
     <NumberInputWrapper>
       <h4>{props.label}</h4>
       <NumberInputIncrease onClick={props.onIncreaseClick}>
-        +
+        <FaPlus />
       </NumberInputIncrease>
       <NumberInputDisplay>{props.value}</NumberInputDisplay>
       <NumberInputDecrease onClick={props.onDecreaseClick}>
-        -
+        <FaMinus />
       </NumberInputDecrease>
     </NumberInputWrapper>
   );

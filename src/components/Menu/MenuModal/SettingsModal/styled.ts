@@ -31,6 +31,11 @@ const NumberInputWrapper = styled.div`
   h4 {
     font-size: 10px;
   }
+
+  svg {
+    color: ${colors.blackText};
+    transform: scale(0.8);
+  }
 `;
 
 const NumberInputDisplay = styled.div`
