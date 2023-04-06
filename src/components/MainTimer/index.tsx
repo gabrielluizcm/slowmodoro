@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { StatusContext, PausedContext, ReversePomodorosContext } from '../App';
 
@@ -32,6 +32,18 @@ export function MainTimer(props: MainTimerProps) {
   // Too many stuff here, I'll reallocate components after base functionalities are done
   const [chillTime, setChillTime] = React.useState(props.chillTime);
   const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
+
+  useEffect(() => {
+    setChillTime(props.chillTime);
+  }, [props.chillTime]);
+
+  useEffect(() => {
+    setWorkTime(
+      reversePomodoros !== 0 && reversePomodoros % 4 === 0
+        ? props.longWorkTime
+        : props.shortWorkTime
+    );
+  }, [props.shortWorkTime, props.longWorkTime]);
 
   const status = useContext(StatusContext);
   const paused = useContext(PausedContext);
@@ -160,28 +172,10 @@ export function MainTimer(props: MainTimerProps) {
     <>
       <StatusLabel status={status} reversePomodoros={reversePomodoros} />
       <TimerSwitch status={status} times={times} />
-      <Button
-        onClick={handleChillButton}
-        className={
-          status === 'chilling'
-            ? paused
-              ? 'active paused chilling'
-              : 'active chilling'
-            : ''
-        }
-      >
+      <Button onClick={handleChillButton} active={status === 'chilling'}>
         Chill
       </Button>
-      <Button
-        onClick={handleWorkButton}
-        className={
-          status === 'working'
-            ? paused
-              ? 'active paused chilling'
-              : 'active chilling'
-            : ''
-        }
-      >
+      <Button onClick={handleWorkButton} active={status === 'working'}>
         Work
       </Button>
     </>

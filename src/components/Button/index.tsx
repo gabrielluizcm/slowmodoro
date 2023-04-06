@@ -3,11 +3,11 @@ import { FaPause, FaPlay, FaStepForward } from 'react-icons/fa';
 
 import { StatusContext, PausedContext } from '../App';
 
-import './style.scss';
+import { StyledButton, ButtonFace } from './styled';
 
 type ButtonProps = {
   children: string;
-  className: string;
+  active: boolean;
   onClick?: () => void;
 };
 
@@ -16,9 +16,9 @@ export function Button(props: ButtonProps): JSX.Element {
   const paused = useContext(PausedContext);
 
   return (
-    <button onClick={props.onClick} className={props.className}>
-      <span className="buttonFace">
-        {props.className.includes('active') ? (
+    <StyledButton onClick={props.onClick} active={props.active}>
+      <ButtonFace active={props.active} paused={paused}>
+        {props.active ? (
           paused ? (
             <FaPlay />
           ) : (
@@ -29,7 +29,7 @@ export function Button(props: ButtonProps): JSX.Element {
         ) : (
           <FaStepForward />
         )}
-      </span>
-    </button>
+      </ButtonFace>
+    </StyledButton>
   );
 }

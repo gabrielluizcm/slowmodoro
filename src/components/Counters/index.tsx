@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { ReversePomodorosContext } from '../App';
 
 import { secondsToTime } from '../../utils/secondsToTime';
 
-import './style.scss';
+import { StyledCounters } from './styled';
 
 type CountersProps = {
   totalChillingTime: number;
   totalWorkingTime: number;
-  reversePomodoros: number;
 };
 
 export function Counters(props: CountersProps) {
+  const reversePomodoros = useContext(ReversePomodorosContext);
+
   return (
-    <div className="counters">
+    <StyledCounters>
       <p>
         <b>Total chilling time:</b> {secondsToTime(props.totalChillingTime)}
       </p>
@@ -20,8 +23,8 @@ export function Counters(props: CountersProps) {
         <b>Total working time:</b> {secondsToTime(props.totalWorkingTime)}
       </p>
       <p>
-        <b>Reverse Pomodoros:</b> {props.reversePomodoros}
+        <b>Reverse Pomodoros:</b> {reversePomodoros}
       </p>
-    </div>
+    </StyledCounters>
   );
 }

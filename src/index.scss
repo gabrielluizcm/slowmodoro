@@ -13,7 +13,6 @@ $activeButton: #5f22d9;
   padding: 0;
   outline: none;
   box-sizing: border-box;
-  color: $regularText;
 }
 
 html,
@@ -27,59 +26,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $regularBackground;
-}
-
-.background {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.3s ease-in-out;
-
-  &.chillBackground {
-    background-color: $chillingBackground;
-  }
-
-  &.shortWorkBackground {
-    background-color: $shortWorkBackground;
-  }
-
-  &.longWorkBackground {
-    background-color: $longWorkBackground;
-  }
-}
-
-.logoImg {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 1em;
-}
-
-.pomodoro {
-  padding: 5px 10px;
-  background-color: $glassBackground;
-  border-radius: 15px;
-  box-shadow: 0 4px 30px #00000001;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid $glassBorder;
-}
-
-#root,
-#logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
 }
 
 #root {
   height: 100%;
-  justify-content: space-around;
-}
-
-#logo {
-  justify-content: center;
 }

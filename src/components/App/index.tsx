@@ -1,11 +1,13 @@
 import React, { createContext } from 'react';
 
-import { Logo } from './Logo/Logo';
-import { MainTimer } from './MainTimer';
-import { Counters } from './Counters';
-import { Footer } from './Footer';
+import { Logo } from '../Logo';
+import { Menu } from '../Menu';
+import { MainTimer } from '../MainTimer';
+import { Counters } from '../Counters';
+import { Footer } from '../Footer';
 
-import '../index.scss';
+import '../../index.scss';
+import { Wrapper, Background, PomodoroContainer } from './styled';
 
 export type Status = 'idle' | 'chilling' | 'working';
 
@@ -16,11 +18,12 @@ export const ReversePomodorosContext = createContext(0);
 function App() {
   const [status, setStatus] = React.useState<Status>('idle');
   const [paused, setPaused] = React.useState(false);
+  const [startChillTime, setStartChillTime] = React.useState(25 * 60);
+  const [startShortWorkTime, setStartShortWorkTime] = React.useState(5 * 60);
+  const [startLongWorkTime, setStartLongWorkTime] = React.useState(15 * 60);
   const [reversePomodoros, setReversePomodoros] = React.useState(0);
   const [totalChillingTime, setTotalChillingTime] = React.useState(0);
   const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
-
-  const background = setBackground(status, reversePomodoros);
 
   const increaseTotalChillingTime = () => {
     setTotalChillingTime(totalChillingTime + 1);
@@ -31,17 +34,33 @@ function App() {
   };
 
   return (
-    <>
-      <div className={background} />
+    <Wrapper>
+      <Background
+        status={status}
+        paused={paused}
+        longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
+      />
       <Logo />
-      <div className="pomodoro">
+      <Menu
+        chillTime={startChillTime / 60}
+        shortWorkTime={startShortWorkTime / 60}
+        longWorkTime={startLongWorkTime / 60}
+        setChillTime={(minutes: number) => setStartChillTime(minutes * 60)}
+        setShortWorkTime={(minutes: number) =>
+          setStartShortWorkTime(minutes * 60)
+        }
+        setLongWorkTime={(minutes: number) =>
+          setStartLongWorkTime(minutes * 60)
+        }
+      />
+      <PomodoroContainer>
         <StatusContext.Provider value={status}>
           <PausedContext.Provider value={paused}>
             <ReversePomodorosContext.Provider value={reversePomodoros}>
               <MainTimer
-                chillTime={25 * 60}
-                shortWorkTime={5 * 60}
-                longWorkTime={15 * 60}
+                chillTime={startChillTime}
+                shortWorkTime={startShortWorkTime}
+                longWorkTime={startLongWorkTime}
                 setStatus={setStatus}
                 setPaused={setPaused}
                 setReversePomodoros={setReversePomodoros}
@@ -51,27 +70,14 @@ function App() {
               <Counters
                 totalChillingTime={totalChillingTime}
                 totalWorkingTime={totalWorkingTime}
-                reversePomodoros={reversePomodoros}
               />
             </ReversePomodorosContext.Provider>
           </PausedContext.Provider>
         </StatusContext.Provider>
-      </div>
+      </PomodoroContainer>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
-
-const setBackground = (status: Status, reversePomodoros: number) => {
-  let background = 'background';
-
-  if (status === 'chilling') background += ' chillBackground';
-  else if (status === 'working') {
-    if (reversePomodoros && reversePomodoros % 4 === 0)
-      background += ' longWorkBackground';
-    else background += ' shortWorkBackground';
-  }
-  return background;
-};
 
 export default App;
