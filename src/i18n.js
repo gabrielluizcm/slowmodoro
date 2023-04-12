@@ -8,7 +8,7 @@ import translationPt from './locales/pt.json';
 // Configuração do i18next
 i18n.use(initReactI18next).init({
   // define o idioma padrão
-  lng: 'pt',
+  lng: 'en',
   // define as traduções disponíveis
   resources: {
     en: {

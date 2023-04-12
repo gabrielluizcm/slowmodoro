@@ -39,7 +39,6 @@ const ButtonFace = styled.span`
 
   svg {
     fill: ${(props: ButtonFaceProps) =>
-    /* eslint-disable */
     props.active ? colors.regularText : colors.regularBackground};
   }
 `;
