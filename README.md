@@ -14,29 +14,31 @@ Below the buttons you will find the **counters**: **total chill time**, **total 
 ## Updates
 
 There are some features I want to develop but aren't still present in the current version, but will be added on the following weeks. Planned updates include, but are not limited to:
-- PT-BR translation
+- Toggle auto play when timer ends
 
 ### Changelog
 - v1.1:
   - Defined **_Slowmodoro_** as app name;
   - Resized logo and main box;
   - Tab title updates to match current status and timer;
-  - Added demo *.gif* to **Usage** section on README;
+  - Added demo *.gif* to **Usage** section on README.
 - v1.2:
   - Reorganized code;
-  - Added sound effects to button clicks and alarms when timers end;
+  - Added sound effects to button clicks and alarms when timers end.
 - v2.0:
   - **FEAT:** timers are now customizable through **Settings** menu;
   - Now using mostly **styled-components** instead of SASS;
   - Started using **Context**;
   - Added **Menu** button and drawer;
   - Added **Info** and **Settings** menu (open through menu drawer);
-  - Corrected colors (and background color when paused)
+  - Corrected colors (and background color when paused).
+- v2.1:
+  - **FEAT:** i18n with English and Portuguese languages (select through **Settings menu**);
 
 # Nerd stuff
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the typescript template. Build and publishing made to [Vercel](https://vercel.com), and current release can be found [at this link](https://slowmodoro.vercel.app/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the Typescript template. Build and publishing made to [Vercel](https://vercel.com), and current release can be found [at this link](https://slowmodoro.vercel.app/).
 
 ## React README starts here vv
 

@@ -7,13 +7,14 @@ type MenuModalProps = {
   closeModal: () => void;
   opened: boolean;
   children: JSX.Element;
+  height: number;
 };
 
 export function MenuModal(props: MenuModalProps) {
   return (
     <>
       <BackShadow onClick={props.closeModal} opened={props.opened} />
-      <Content opened={props.opened}>
+      <Content opened={props.opened} height={props.height}>
         <CloseModal onClick={props.closeModal}>
           <FaMinus />
         </CloseModal>
