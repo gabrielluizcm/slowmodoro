@@ -52,6 +52,7 @@ export function Menu(props: MenuProps) {
       <MenuModal
         closeModal={() => setModalCogOpen(false)}
         opened={modalCogOpen}
+        height={350}
       >
         <SettingsModal
           chillTime={props.chillTime}
@@ -65,6 +66,7 @@ export function Menu(props: MenuProps) {
       <MenuModal
         closeModal={() => setModalInfoOpen(false)}
         opened={modalInfoOpen}
+        height={300}
       >
         <InfoModal />
       </MenuModal>

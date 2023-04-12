@@ -47,6 +47,7 @@ const BackShadow = styled.div<BackShadowProps>`
 
 type ContentProps = {
   opened: boolean;
+  height?: number;
 };
 
 const Content = styled.div<ContentProps>`
@@ -54,7 +55,7 @@ const Content = styled.div<ContentProps>`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 300px;
+  height: ${(props) => `${props.height}px`};
   background: ${colors.regularBackground};
   border-top: 1px solid ${colors.activeButton};
   border-top-left-radius: 15px;
@@ -65,7 +66,7 @@ const Content = styled.div<ContentProps>`
   z-index: 1001;
   display: inherit;
   transform: ${(props) =>
-    props.opened ? 'translateY(0)' : 'translateY(+300px)'};
+    props.opened ? 'translateY(0)' : `translateY(+${props.height}px)`};
   transition: transform 0.3s ease-in-out;
 
   a {
@@ -89,7 +90,7 @@ const Content = styled.div<ContentProps>`
 
 const CloseModal = styled.div`
   cursor: pointer;
-  width: 100 %;
+  width: 100%;
   text-align: center;
   margin-bottom: 20px;
 `;

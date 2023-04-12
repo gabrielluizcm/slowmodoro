@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '../../utils/colors';
 
 const StyledButton = styled.button`
-  font-size: 2em;
+  font-size: 1.5em;
   width: 150px;
   border-radius: 10px;
   box-shadow: none;
@@ -27,7 +27,7 @@ const ButtonFace = styled.span`
   display: inline-block;
   width: 150px;
   height: 68.3px;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   background-color: ${(props: ButtonFaceProps) =>
     props.active ? colors.activeButton : colors.regularText};
@@ -39,7 +39,6 @@ const ButtonFace = styled.span`
 
   svg {
     fill: ${(props: ButtonFaceProps) =>
-    /* eslint-disable */
     props.active ? colors.regularText : colors.regularBackground};
   }
 `;

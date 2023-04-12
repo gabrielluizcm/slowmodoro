@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Status } from '../MainTimer';
 
@@ -10,17 +11,13 @@ type StatusLabelProps = {
 };
 
 export function StatusLabel(props: StatusLabelProps) {
-  let status = firstCapital(props.status);
-  if (
-    status === 'Working' &&
-    props.reversePomodoros !== 0 &&
-    props.reversePomodoros % 4 === 0
-  )
-    status = 'Long Working';
+  const { t } = useTranslation();
+
+  let status = t('statusIdle');
+  if (props.status === 'chilling') status = t('statusChill');
+  else if (props.reversePomodoros && props.reversePomodoros % 4 === 0)
+    status = t('statusLongWork');
+  else status = t('statusShortWork');
 
   return <StyledStatus>{status}</StyledStatus>;
 }
-
-const firstCapital = (string: string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};

@@ -1,14 +1,13 @@
 import React from 'react';
-import { FaCog, FaExchangeAlt, FaPlus, FaMinus } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
-import {
-  InputWrapper,
-  InputLabel,
-  NumberInputWrapper,
-  NumberInputDisplay,
-  NumberInputIncrease,
-  NumberInputDecrease,
-} from './styled';
+import { Hr } from '../../styled';
+
+import NumberInput from './NumberInput';
+import LangSelector from './LangSelector';
+
+import { InputWrapper, InputLabel } from './styled';
 import { ModalContent } from '../styled';
 
 type SettingsModalProps = {
@@ -20,34 +19,14 @@ type SettingsModalProps = {
   setLongWorkTime: (minutes: number) => void;
 };
 
-type NumberInputProps = {
-  label: string;
-  value: number;
-  onIncreaseClick: () => void;
-  onDecreaseClick: () => void;
-};
-
 type HandleControlProps = {
   minutes: number;
   callback: (minutes: number) => void;
 };
 
-function NumberInput(props: NumberInputProps) {
-  return (
-    <NumberInputWrapper>
-      <h4>{props.label}</h4>
-      <NumberInputIncrease onClick={props.onIncreaseClick}>
-        <FaPlus />
-      </NumberInputIncrease>
-      <NumberInputDisplay>{props.value}</NumberInputDisplay>
-      <NumberInputDecrease onClick={props.onDecreaseClick}>
-        <FaMinus />
-      </NumberInputDecrease>
-    </NumberInputWrapper>
-  );
-}
-
 export default function SettingsModal(props: SettingsModalProps) {
+  const { t } = useTranslation();
+
   const handleIncrease = (handleProps: HandleControlProps) => {
     if (handleProps.minutes === 59) return;
     handleProps.callback(handleProps.minutes + 1);
@@ -73,12 +52,12 @@ export default function SettingsModal(props: SettingsModalProps) {
   return (
     <ModalContent>
       <h2>
-        Settings <FaCog />
+        {t('settingsLabel')} <FaCog />
       </h2>
-      <InputLabel>Timers (minutes)</InputLabel>
+      <InputLabel>{t('timersSettingLabel')}</InputLabel>
       <InputWrapper>
         <NumberInput
-          label="Chilling"
+          label={t('chillingTimerSettingLabel')}
           value={props.chillTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -95,7 +74,7 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapChillShort} />
         <NumberInput
-          label="Short Work"
+          label={t('shortWorkTimerSettingLabel')}
           value={props.shortWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -112,7 +91,7 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapShortLong} />
         <NumberInput
-          label="LongWork"
+          label={t('longWorkTimerSettingLabel')}
           value={props.longWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -127,6 +106,11 @@ export default function SettingsModal(props: SettingsModalProps) {
             })
           }
         />
+      </InputWrapper>
+      <Hr />
+      <InputLabel>{t('langSettingLabel')}</InputLabel>
+      <InputWrapper>
+        <LangSelector />
       </InputWrapper>
     </ModalContent>
   );

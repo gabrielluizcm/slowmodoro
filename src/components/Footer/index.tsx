@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { FaGithub, FaGithubAlt } from 'react-icons/fa';
 
 import { StyledFooter, GitLinks } from './styled';
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <StyledFooter>
       <GitLinks>
@@ -24,7 +27,7 @@ export function Footer() {
         </a>
       </GitLinks>
       <p>
-        Made with joy by{' '}
+        {t('footer')}{' '}
         <a
           href="http://gabrielluizcm.github.io"
           target="_blank"

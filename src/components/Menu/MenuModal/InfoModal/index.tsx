@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaLink, FaInfoCircle } from 'react-icons/fa';
 
 import { Copyright, StyledHeader } from './styled';
@@ -6,6 +7,8 @@ import { ModalContent } from '../styled';
 import { Hr } from '../../styled';
 
 export default function InfoModal() {
+  const { t } = useTranslation();
+
   return (
     <ModalContent>
       <StyledHeader>
@@ -16,7 +19,7 @@ export default function InfoModal() {
         title="Pomodoro Technique page on Wikipedia"
       >
         <FaLink />
-        What is the Pomodoro Technique?
+        {t('aboutPomodoro')}
       </a>
       <Hr />
       <a
@@ -24,7 +27,7 @@ export default function InfoModal() {
         title="Reverse Pomodoro Article on TiimoApp"
       >
         <FaLink />
-        About the Reverse Pomodoro Technique
+        {t('aboutReverse')}
       </a>
       <Copyright>
         <a
@@ -32,7 +35,7 @@ export default function InfoModal() {
           title="Pomodoro Icons on Flaticon"
         >
           <FaLink />
-          Pomodoro icon created by Freepik - Flaticon using online editor
+          {t('iconCredit')}
         </a>
       </Copyright>
     </ModalContent>

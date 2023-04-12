@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { StatusContext, PausedContext, ReversePomodorosContext } from '../App';
 
@@ -29,7 +30,7 @@ type MainTimerProps = {
 export type Status = 'idle' | 'chilling' | 'working';
 
 export function MainTimer(props: MainTimerProps) {
-  // Too many stuff here, I'll reallocate components after base functionalities are done
+  const { t } = useTranslation();
   const [chillTime, setChillTime] = React.useState(props.chillTime);
   const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
 
@@ -90,12 +91,9 @@ export function MainTimer(props: MainTimerProps) {
   };
 
   const handleChillButton = () => {
+    const confirmText = t('toChillSkip');
     if (status === 'working')
-      if (
-        confirm(
-          'Are you sure you want to skip into chilling? Timers will be reset!'
-        )
-      ) {
+      if (confirm(confirmText)) {
         startTimer();
         return resetWork();
       } else return;
@@ -107,12 +105,9 @@ export function MainTimer(props: MainTimerProps) {
   };
 
   const handleWorkButton = () => {
+    const confirmText = t('toWorkSkip');
     if (status === 'chilling')
-      if (
-        confirm(
-          'Are you sure you want to skip into working? Timers will be reset!'
-        )
-      ) {
+      if (confirm(confirmText)) {
         startTimer();
         return resetChill();
       } else return;
@@ -141,13 +136,13 @@ export function MainTimer(props: MainTimerProps) {
 
   // Timer on tab is 1 second late when not paused, will try to fix eventually
   const updateTabTitle = () => {
-    let title = 'Slowmodoro - a reverse Pomodoro';
+    let title = `Slowmodoro - ${t('subtitle')}`;
 
-    if (status === 'chilling') title = `Chilling - ${secondsToTime(chillTime)}`;
+    if (status === 'chilling') title = `${t('statusChill')} - ${secondsToTime(chillTime)}`;
     else if (status === 'working')
-      title = `Working - ${secondsToTime(workTime)}`;
+      title = `${t('statusShortWork')} - ${secondsToTime(workTime)}`;
 
-    if (paused) title = `PAUSED | ${title}`;
+    if (paused) title = `${t('paused')} | ${title}`;
 
     document.title = title;
   };
@@ -173,10 +168,10 @@ export function MainTimer(props: MainTimerProps) {
       <StatusLabel status={status} reversePomodoros={reversePomodoros} />
       <TimerSwitch status={status} times={times} />
       <Button onClick={handleChillButton} active={status === 'chilling'}>
-        Chill
+        {t('chillButton')}
       </Button>
       <Button onClick={handleWorkButton} active={status === 'working'}>
-        Work
+        {t('workButton')}
       </Button>
     </>
   );
