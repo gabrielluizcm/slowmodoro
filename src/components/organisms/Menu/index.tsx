@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaBars, FaCog, FaInfo } from 'react-icons/fa';
 
+import {
+  StatusContext,
+  PausedContext,
+  ReversePomodorosContext,
+  ReverseModeContext,
+  PomodorosContext
+} from '../../App';
 import MenuModal from '../../molecules/MenuModal';
 import InfoModal from '../../modals/InfoModal';
 import SettingsModal from '../../modals/SettingsModal';
@@ -20,16 +27,19 @@ type MenuProps = {
 };
 
 export function Menu(props: MenuProps) {
+  const status = useContext(StatusContext);
+  const paused = useContext(PausedContext);
+  const reversePomodoros = useContext(ReversePomodorosContext);
+  const reverseMode = useContext(ReverseModeContext);
+  const pomodoros = useContext(PomodorosContext);
+
   const [opened, setOpened] = useState(false);
-  const [transition, setTransition] = useState('none');
   const [modalCogOpen, setModalCogOpen] = useState(false);
   const [modalInfoOpen, setModalInfoOpen] = useState(false);
 
   const handleIconClick = () => {
-    setTransition(opened ? 'closing' : 'opening');
     const newOpened = !opened;
     setOpened(newOpened);
-    setTimeout(() => setTransition('none'), 300);
   };
 
   const handleCogClick = () => {
@@ -44,10 +54,24 @@ export function Menu(props: MenuProps) {
 
   return (
     <>
-      <StyledMenu onClick={handleIconClick}>
+      <StyledMenu
+        status={status}
+        paused={paused}
+        reverseMode={reverseMode}
+        longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
+        longChill={!!(pomodoros && pomodoros % 4 === 0)}
+        onClick={handleIconClick}
+      >
         <FaBars />
       </StyledMenu>
-      <StyledMenuDrawer opened={opened} transition={transition}>
+      <StyledMenuDrawer
+        status={status}
+        paused={paused}
+        reverseMode={reverseMode}
+        longWork={!!(reversePomodoros && reversePomodoros % 4 === 0)}
+        longChill={!!(pomodoros && pomodoros % 4 === 0)}
+        opened={opened}
+      >
         <></>
         <FaCog onClick={handleCogClick} />
         <FaInfo onClick={handleInfoClick} />

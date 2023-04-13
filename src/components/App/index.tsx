@@ -69,23 +69,23 @@ function App() {
             <ReversePomodorosContext.Provider value={reversePomodoros}>
               <PomodorosContext.Provider value={pomodoros} >
                 <StatusContext.Provider value={status}>
-                  <Menu
-                    chillTime={startChillTime / 60}
-                    shortWorkTime={startShortWorkTime / 60}
-                    longWorkTime={startLongWorkTime / 60}
-                    setChillTime={(minutes: number) => setStartChillTime(minutes * 60)}
-                    setShortWorkTime={(minutes: number) =>
-                      setStartShortWorkTime(minutes * 60)
-                    }
-                    setLongWorkTime={(minutes: number) =>
-                      setStartLongWorkTime(minutes * 60)
-                    }
-                    toggleAutoPlay={() => toggleAutoPlay()}
-                    toggleEnableSounds={() => toggleEnableSounds()}
-                    toggleReverseMode={() => toggleReverseMode()}
-                  />
-                  <PomodoroContainer>
-                    <PausedContext.Provider value={paused}>
+                  <PausedContext.Provider value={paused}>
+                    <Menu
+                      chillTime={startChillTime / 60}
+                      shortWorkTime={startShortWorkTime / 60}
+                      longWorkTime={startLongWorkTime / 60}
+                      setChillTime={(minutes: number) => setStartChillTime(minutes * 60)}
+                      setShortWorkTime={(minutes: number) =>
+                        setStartShortWorkTime(minutes * 60)
+                      }
+                      setLongWorkTime={(minutes: number) =>
+                        setStartLongWorkTime(minutes * 60)
+                      }
+                      toggleAutoPlay={() => toggleAutoPlay()}
+                      toggleEnableSounds={() => toggleEnableSounds()}
+                      toggleReverseMode={() => toggleReverseMode()}
+                    />
+                    <PomodoroContainer>
                       {!reverseMode ?
                         <MainTimer
                           chillTime={startChillTime}
@@ -111,8 +111,8 @@ function App() {
                         totalChillingTime={totalChillingTime}
                         totalWorkingTime={totalWorkingTime}
                       />
-                    </PausedContext.Provider>
-                  </PomodoroContainer>
+                    </PomodoroContainer>
+                  </PausedContext.Provider>
                 </StatusContext.Provider>
               </PomodorosContext.Provider>
             </ReversePomodorosContext.Provider>
