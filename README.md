@@ -33,7 +33,11 @@ There are some features I want to develop but aren't still present in the curren
   - Added **Info** and **Settings** menu (open through menu drawer);
   - Corrected colors (and background color when paused).
 - v2.1:
-  - **FEAT:** i18n with English and Portuguese languages (select through **Settings menu**);
+  - **FEAT:** i18n with English and Portuguese languages (select through **Settings menu**).
+- v2.1.1:
+  - **FIXED:** text alignment on timer's setting labels when using Portuguese language;
+  - Components are now atomic organized;
+  - Colors have more meaningful names.
 
 # Nerd stuff
 
