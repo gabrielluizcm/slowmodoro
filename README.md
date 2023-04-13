@@ -38,6 +38,8 @@ There are some features I want to develop but aren't still present in the curren
   - **FIXED:** text alignment on timer's setting labels when using Portuguese language;
   - Components are now atomic organized;
   - Colors have more meaningful names.
+- v2.1.2:
+  - Changed colors in **Settings Menu** to fit the palette better.
 
 # Nerd stuff
 
