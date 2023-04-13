@@ -15,7 +15,7 @@ const StyledReactCountryFlag = styled(ReactCountryFlag)`
 const Tick = styled(TiTick)`
 position: absolute;
 transform: translate(-45px, 35px);
-background-color: ${colors.blueishGreen};
+background-color: ${colors.orangeishPink};
 border-radius: 50%;
 font-size: 1.1em;
 `;

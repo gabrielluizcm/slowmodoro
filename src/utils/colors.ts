@@ -2,6 +2,7 @@ const colors = {
   electricBlue: '#2c016d',
   transparentBlueishGreen: '#51d6ca99',
   blueishGreen: '#51d6ca',
+  orangeishPink: '#f15ba6',
   brightSilver: '#e4e4e4',
   lightGrey: '#d3d3d3',
   electricPurple: '#ac73ff',

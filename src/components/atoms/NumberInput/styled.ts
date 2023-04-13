@@ -41,13 +41,13 @@ const NumberInputControl = styled.button`
 `;
 
 const NumberInputIncrease = styled(NumberInputControl)`
-  background: ${colors.goldenYellow};
+  background: ${colors.electricPurple};
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
 
 const NumberInputDecrease = styled(NumberInputControl)`
-  background: ${colors.alizarinCrimson};
+  background: ${colors.orangeishPink};
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 `;
