@@ -2,6 +2,7 @@
   "subtitle": "a reverse Pomodoro App",
   "statusIdle": "Idle",
   "statusChill": "Chilling",
+  "statusLongChill": "Long chill",
   "statusShortWork": "Working",
   "statusLongWork": "Long Work",
   "paused": "PAUSED",
@@ -10,7 +11,8 @@
   "totalChillCounter": "Total chilling time",
   "totalWorkCounter": "Total working time",
   "reversePomodorosCounter": "Reverse Pomodoros",
-  "footer": "Made with joy by",
+  "footer": "Made with ",
+  "footerBy": " by ",
   "aboutPomodoro": "What is the Pomodoro Technique?",
   "aboutReverse": "About the Reverse Pomodoro Technique",
   "iconCredit": "Pomodoro icon created by Freepik - Flaticon using online editor",
@@ -19,9 +21,14 @@
   "settingsLabel": "Settings",
   "timersSettingLabel": "Timers (minutes)",
   "chillingTimerSettingLabel": "Chilling",
+  "workingTimerSettingLabel": "Working",
   "shortWorkTimerSettingLabel": "Short Work",
   "longWorkTimerSettingLabel": "Long Work",
+  "shortChillTimerSettingLabel": "Short Chill",
+  "longChillTimerSettingLabel": "Long Chill",
   "langSettingLabel": "Language",
   "autoplayLabel": "Autoplay next cycle when timer ends",
-  "silentModeLabel": "Enable sounds"
+  "silentModeLabel": "Enable sounds",
+  "reverseModeLabel": "Reverse mode",
+  "confirmToggleReverseMode": "Current timers will be reset! Are you sure you want to toggle Reverse Mode?"
 }

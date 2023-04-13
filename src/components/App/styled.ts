@@ -22,7 +22,9 @@ const Wrapper = styled.div`
 type BackgroundProps = {
   status: Status;
   paused: boolean;
+  reverseMode: boolean;
   longWork: boolean;
+  longChill: boolean;
 };
 
 const Background = styled.div`
@@ -34,13 +36,20 @@ const Background = styled.div`
   z-index: -1;
   transition: all 0.3s ease-in-out;
   background-color: ${(props: BackgroundProps) => {
-    const { status, paused, longWork } = props;
-    if (paused) return colors.electricBlue;
-    if (status === 'chilling') return colors.electricBlue;
-    else if (status === 'working')
-      if (longWork) return colors.alizarinCrimson;
-      else return colors.goldenYellow;
-    else return colors.electricBlue;
+    if (props.paused || props.status === 'idle')
+      return colors.electricBlue;
+
+    if (!props.reverseMode) {
+      if (props.status === 'chilling') return colors.electricPurple;
+      else
+        if (props.longWork) return colors.alizarinCrimson;
+        else return colors.goldenYellow;
+    }
+
+    if (props.status === 'chilling') return colors.goldenYellow;
+    else
+      if (props.longChill) return colors.orangeishPink;
+      else return colors.electricPurple;
   }};
 `;
 

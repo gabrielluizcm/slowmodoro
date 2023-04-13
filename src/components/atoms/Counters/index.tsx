@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ReversePomodorosContext } from '../../App';
+import {
+  ReversePomodorosContext,
+  ReverseModeContext,
+  PomodorosContext
+} from '../../App';
 
 import { secondsToTime } from '../../../utils/secondsToTime';
 
@@ -15,6 +19,8 @@ type CountersProps = {
 export function Counters(props: CountersProps) {
   const { t } = useTranslation();
   const reversePomodoros = useContext(ReversePomodorosContext);
+  const reverseMode = useContext(ReverseModeContext);
+  const pomodoros = useContext(PomodorosContext);
 
   return (
     <StyledCounters>
@@ -26,7 +32,12 @@ export function Counters(props: CountersProps) {
         <b>{t('totalWorkCounter')}:</b> {secondsToTime(props.totalWorkingTime)}
       </p>
       <p>
-        <b>{t('reversePomodorosCounter')}:</b> {reversePomodoros}
+        <b>
+          {!reverseMode
+            ? t('reversePomodorosCounter')
+            : 'Pomodoros'
+          }:
+        </b> {!reverseMode ? reversePomodoros : pomodoros}
       </p>
     </StyledCounters>
   );

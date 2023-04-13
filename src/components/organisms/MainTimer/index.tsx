@@ -5,8 +5,10 @@ import {
   StatusContext,
   PausedContext,
   ReversePomodorosContext,
+  PomodorosContext,
   AutoPlayContext,
-  EnableSoundsContext
+  EnableSoundsContext,
+  ReverseModeContext
 } from '../../App';
 
 import { Button } from '../../atoms/Button';
@@ -28,7 +30,8 @@ type MainTimerProps = {
   longWorkTime: number;
   setStatus: React.Dispatch<React.SetStateAction<Status>>;
   setPaused: React.Dispatch<React.SetStateAction<boolean>>;
-  setReversePomodoros: React.Dispatch<React.SetStateAction<number>>;
+  setReversePomodoros?: React.Dispatch<React.SetStateAction<number>>;
+  setPomodoros?: React.Dispatch<React.SetStateAction<number>>;
   increaseTotalChillingTime: () => void;
   increaseTotalWorkingTime: () => void;
 };
@@ -39,32 +42,38 @@ export function MainTimer(props: MainTimerProps) {
   const { t } = useTranslation();
   const autoPlay = useContext(AutoPlayContext);
   const enableSounds = useContext(EnableSoundsContext);
-
-  const [chillTime, setChillTime] = React.useState(props.chillTime);
-  const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
-
-  useEffect(() => {
-    setChillTime(props.chillTime);
-  }, [props.chillTime]);
-
-  useEffect(() => {
-    setWorkTime(
-      reversePomodoros !== 0 && reversePomodoros % 4 === 0
-        ? props.longWorkTime
-        : props.shortWorkTime
-    );
-  }, [props.shortWorkTime, props.longWorkTime]);
-
+  const reverseMode = useContext(ReverseModeContext);
   const status = useContext(StatusContext);
   const paused = useContext(PausedContext);
   const reversePomodoros = useContext(ReversePomodorosContext);
+  const pomodoros = useContext(PomodorosContext);
+
+  const [chillTime, setChillTime] = React.useState(props.chillTime);
+  const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
 
   const times = {
     chillTime,
     workTime,
   };
 
+  useEffect(() => {
+    setChillTime(props.chillTime);
+  }, [props.chillTime, reverseMode]);
+
+  useEffect(() => {
+    const workTime = reverseMode
+      ? pomodoros !== 0 && pomodoros % 4 === 0
+        ? props.longWorkTime
+        : props.shortWorkTime
+      : reversePomodoros !== 0 && reversePomodoros % 4 === 0
+        ? props.longWorkTime
+        : props.shortWorkTime;
+    setWorkTime(workTime);
+  }, [props.shortWorkTime, props.longWorkTime, reverseMode]);
+
   const increaseAndCheckReversePomodoros = () => {
+    if (!props.setReversePomodoros) return;
+
     const newReversePomodoros = reversePomodoros + 1;
     props.setReversePomodoros(newReversePomodoros);
 
@@ -72,10 +81,23 @@ export function MainTimer(props: MainTimerProps) {
     if (newReversePomodoros % 4 === 0) setWorkTime(props.longWorkTime);
   };
 
+  const increaseAndCheckPomodoros = () => {
+    if (!props.setPomodoros) return;
+
+    const newPomodoros = pomodoros + 1;
+    props.setPomodoros(newPomodoros);
+
+    // Using const instead of state to work around state change delay
+    if (newPomodoros % 4 === 0) setWorkTime(props.longWorkTime);
+  };
+
   const resetChill = () => {
     setChillTime(props.chillTime);
     props.setPaused(!autoPlay);
-    increaseAndCheckReversePomodoros();
+    if (!reverseMode)
+      increaseAndCheckReversePomodoros();
+    else
+      increaseAndCheckPomodoros();
     props.setStatus('working');
   };
 
@@ -161,12 +183,18 @@ export function MainTimer(props: MainTimerProps) {
     if (!paused) {
       if (status === 'chilling') {
         setChillTime(chillTime - 1);
-        props.increaseTotalChillingTime();
+        if (!reverseMode)
+          props.increaseTotalChillingTime();
+        else
+          props.increaseTotalWorkingTime();
         checkChillTimeLeft();
       }
       if (status === 'working') {
         setWorkTime(workTime - 1);
-        props.increaseTotalWorkingTime();
+        if (!reverseMode)
+          props.increaseTotalWorkingTime();
+        else
+          props.increaseTotalChillingTime();
         checkWorkTimeLeft();
       }
     }
@@ -175,13 +203,13 @@ export function MainTimer(props: MainTimerProps) {
 
   return (
     <>
-      <StatusLabel status={status} reversePomodoros={reversePomodoros} />
+      <StatusLabel />
       <TimerSwitch status={status} times={times} />
       <Button onClick={handleChillButton} active={status === 'chilling'}>
-        {t('chillButton')}
+        {!reverseMode ? t('chillButton') : t('workButton')}
       </Button>
       <Button onClick={handleWorkButton} active={status === 'working'}>
-        {t('workButton')}
+        {!reverseMode ? t('workButton') : t('chillButton')}
       </Button>
     </>
   );

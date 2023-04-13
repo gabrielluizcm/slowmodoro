@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Status } from '../../organisms/MainTimer';
+import {
+  StatusContext,
+  ReversePomodorosContext,
+  ReverseModeContext,
+  PomodorosContext
+} from '../../App';
 
 import { StyledStatus } from './styled';
 
-type StatusLabelProps = {
-  status: Status;
-  reversePomodoros: number;
-};
-
-export function StatusLabel(props: StatusLabelProps) {
+export function StatusLabel() {
   const { t } = useTranslation();
+  const status = useContext(StatusContext);
+  const reversePomodoros = useContext(ReversePomodorosContext);
+  const reverseMode = useContext(ReverseModeContext);
+  const pomodoros = useContext(PomodorosContext);
 
-  let status = t('statusIdle');
-  if (props.status === 'chilling') status = t('statusChill');
-  else if (props.reversePomodoros && props.reversePomodoros % 4 === 0)
-    status = t('statusLongWork');
-  else status = t('statusShortWork');
+  let statusLabel = t('statusIdle');
 
-  return <StyledStatus>{status}</StyledStatus>;
+  if (status === 'chilling')
+    statusLabel = !reverseMode ? t('statusChill') : t('statusShortWork');
+  else
+    if (status === 'working')
+      if (!reverseMode)
+        statusLabel = reversePomodoros && reversePomodoros % 4 === 0
+          ? t('statusLongWork')
+          : t('statusShortWork');
+      else
+        statusLabel = pomodoros && pomodoros % 4 === 0
+          ? t('statusLongChill')
+          : t('statusChill');
+
+  return <StyledStatus>{statusLabel}</StyledStatus>;
 }

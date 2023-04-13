@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
-import { AutoPlayContext, EnableSoundsContext } from '../../App';
+import {
+  StatusContext,
+  AutoPlayContext,
+  EnableSoundsContext,
+  ReverseModeContext
+} from '../../App';
 
 import NumberInput from '../../atoms/NumberInput';
 import Switch from '../../atoms/Switch';
@@ -18,8 +23,9 @@ type SettingsModalProps = {
   setChillTime: (minutes: number) => void;
   setShortWorkTime: (minutes: number) => void;
   setLongWorkTime: (minutes: number) => void;
-  setAutoPlay: () => void;
-  setEnableSounds: () => void;
+  toggleAutoPlay: () => void;
+  toggleEnableSounds: () => void;
+  toggleReverseMode: () => void;
 };
 
 type HandleControlProps = {
@@ -29,8 +35,10 @@ type HandleControlProps = {
 
 export default function SettingsModal(props: SettingsModalProps) {
   const { t } = useTranslation();
+  const status = useContext(StatusContext);
   const autoPlay = useContext(AutoPlayContext);
   const enableSounds = useContext(EnableSoundsContext);
+  const reverseMode = useContext(ReverseModeContext);
 
   const handleIncrease = (handleProps: HandleControlProps) => {
     if (handleProps.minutes === 59) return;
@@ -54,6 +62,14 @@ export default function SettingsModal(props: SettingsModalProps) {
     props.setShortWorkTime(temp);
   };
 
+  const handleToggleMode = () => {
+    const confirmText = t('confirmToggleReverseMode');
+    if (status !== 'idle' && !confirm(confirmText))
+      return;
+
+    props.toggleReverseMode();
+  }
+
   return (
     <ModalContent>
       <h2>
@@ -62,7 +78,10 @@ export default function SettingsModal(props: SettingsModalProps) {
       <InputLabel>{t('timersSettingLabel')}</InputLabel>
       <InputWrapper>
         <NumberInput
-          label={t('chillingTimerSettingLabel')}
+          label={!reverseMode
+            ? t('chillingTimerSettingLabel')
+            : t('workingTimerSettingLabel')
+          }
           value={props.chillTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -79,7 +98,10 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapChillShort} />
         <NumberInput
-          label={t('shortWorkTimerSettingLabel')}
+          label={!reverseMode
+            ? t('shortWorkTimerSettingLabel')
+            : t('shortChillTimerSettingLabel')
+          }
           value={props.shortWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -96,7 +118,10 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapShortLong} />
         <NumberInput
-          label={t('longWorkTimerSettingLabel')}
+          label={!reverseMode
+            ? t('longWorkTimerSettingLabel')
+            : t('longChillTimerSettingLabel')
+          }
           value={props.longWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -119,8 +144,9 @@ export default function SettingsModal(props: SettingsModalProps) {
       </InputWrapper>
       <Hr />
       <InputLabel>Misc</InputLabel>
-      <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.setAutoPlay} />
-      <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.setEnableSounds} />
+      <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.toggleAutoPlay} />
+      <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.toggleEnableSounds} />
+      <Switch label={t('reverseModeLabel')} active={reverseMode} onClick={handleToggleMode} />
     </ModalContent>
   );
 }

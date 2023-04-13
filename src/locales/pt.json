@@ -2,6 +2,7 @@
   "subtitle": "um app de Pomodoro Reverso",
   "statusIdle": "Inativo",
   "statusChill": "Descansando",
+  "statusLongChill": "Descanso longo",
   "statusShortWork": "Trabalhando",
   "statusLongWork": "Trabalho longo",
   "paused": "PAUSADO",
@@ -10,7 +11,8 @@
   "totalChillCounter": "Tempo total de descanso",
   "totalWorkCounter": "Tempo total de trabalho",
   "reversePomodorosCounter": "Pomorodos reversos",
-  "footer": "Feito com alegria por",
+  "footer": "Feito com ",
+  "footerBy": " por ",
   "aboutPomodoro": "O que é a técnica Pomodoro?",
   "aboutReverse": "Sobre a técnica Pomodoro reversa",
   "iconCredit": "Ícone Pomodoro criado por Freepik - Flaticon usando o editor online",
@@ -19,9 +21,14 @@
   "settingsLabel": "Configurações",
   "timersSettingLabel": "Temporizadores (minutos)",
   "chillingTimerSettingLabel": "Descanso",
+  "workingTimerSettingLabel": "Trabalhando",
   "shortWorkTimerSettingLabel": "Trabalho curto",
   "longWorkTimerSettingLabel": "Trabalho longo",
+  "shortChillTimerSettingLabel": "Descanso curto",
+  "longChillTimerSettingLabel": "Descanso longo",
   "langSettingLabel": "Linguagem",
   "autoplayLabel": "Iniciar próximo timer automaticamente",
-  "silentModeLabel": "Habilitar sons"
+  "silentModeLabel": "Habilitar sons",
+  "reverseModeLabel": "Modo reverso",
+  "confirmToggleReverseMode": "Os temporizadores atuais serão resetados! Tem certeza que deseja alterar no modo reverso?"
 }
