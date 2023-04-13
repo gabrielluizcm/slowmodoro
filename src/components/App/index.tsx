@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
 
-import { Logo } from '../Logo';
-import { Menu } from '../Menu';
-import { MainTimer } from '../MainTimer';
-import { Counters } from '../Counters';
-import { Footer } from '../Footer';
+import { Logo } from '../atoms/Logo';
+import { Menu } from '../organisms/Menu';
+import { MainTimer } from '../organisms/MainTimer';
+import { Counters } from '../atoms/Counters';
+import { Footer } from '../atoms/Footer';
 
 import '../../index.scss';
 import { Wrapper, Background, PomodoroContainer } from './styled';
