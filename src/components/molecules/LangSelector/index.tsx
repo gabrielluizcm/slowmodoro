@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import i18nRoot from '../../../../i18n';
-import LangButton from './LangButton';
+import i18nRoot from '../../../i18n';
+import LangButton from '../../atoms/LangButton';
 
 import { LangWrapper } from './styled';
 

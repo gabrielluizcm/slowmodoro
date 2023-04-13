@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import colors from '../../../../utils/colors';
+import colors from '../../../utils/colors';
 
 const NumberInputWrapper = styled.div`
   width: 70px;

@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
 
-import NumberInput from './NumberInput';
-import LangSelector from './LangSelector';
+import NumberInput from '../../atoms/NumberInput';
+import LangSelector from '../../molecules/LangSelector';
 
 import { ModalContent, Hr } from '../../molecules/MenuModal/styled';
 import { InputWrapper, InputLabel } from './styled';
