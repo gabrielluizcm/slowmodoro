@@ -10,7 +10,7 @@ const StyledFooter = styled.footer`
   font-size: 12px;
 
   a {
-    color: ${colors.activeButton};
+    color: ${colors.deepBlueishPurple};
     text-decoration: none;
   }
 `;
@@ -19,7 +19,7 @@ const GitLinks = styled.p`
   font-size: 2em;
 
   svg {
-    color: ${colors.regularText};
+    color: ${colors.brightSilver};
   }
 
   a {

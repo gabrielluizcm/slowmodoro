@@ -8,13 +8,13 @@ const StyledButton = styled.button`
   box-shadow: none;
   border: none;
   background-color: ${(props: { active: boolean; onClick?: () => void }) =>
-    props.active ? colors.darkenedActiveButton : colors.darkenedRegularText};
+    props.active ? colors.deepPurple : colors.lightGrey};
   margin: 0 10px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
   svg {
-    fill: ${colors.regularBackground};
+    fill: ${colors.electricBlue};
   }
 `;
 
@@ -30,16 +30,16 @@ const ButtonFace = styled.span`
   padding: 20px;
   border-radius: 10px;
   background-color: ${(props: ButtonFaceProps) =>
-    props.active ? colors.activeButton : colors.regularText};
+    props.active ? colors.deepBlueishPurple : colors.brightSilver};
   color: ${(props: ButtonFaceProps) =>
-    props.active ? colors.regularText : colors.regularBackground};
+    props.active ? colors.brightSilver : colors.electricBlue};
   transform: ${(props: ButtonFaceProps) =>
     props.active && !props.paused ? 'translateY(-5px)' : 'translateY(-10px)'};
   transition: all 0.3s ease-in-out;
 
   svg {
     fill: ${(props: ButtonFaceProps) =>
-    props.active ? colors.regularText : colors.regularBackground};
+    props.active ? colors.brightSilver : colors.electricBlue};
   }
 `;
 

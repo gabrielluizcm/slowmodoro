@@ -10,7 +10,7 @@ const StyledMenu = styled.div`
   margin: 15px;
   font-size: 1.5em;
   cursor: pointer;
-  background-color: ${colors.activeButton};
+  background-color: ${colors.deepBlueishPurple};
   display: flex;
   flex-direction: column;
   align-items: center;

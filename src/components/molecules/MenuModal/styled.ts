@@ -22,7 +22,7 @@ const ModalContent = styled.div`
 
   a,
   a:visited {
-    color: ${colors.regularText};
+    color: ${colors.brightSilver};
   }
 `;
 
@@ -37,7 +37,7 @@ const BackShadow = styled.div<BackShadowProps>`
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: ${colors.backShadow};
+  background: ${colors.transparentBlack};
   z-index: 1000;
   transition: all 0.1s ease-in-out;
   opacity: ${(props) => (props.opened ? 1 : 0)};
@@ -56,8 +56,8 @@ const Content = styled.div<ContentProps>`
   left: 0;
   width: 100vw;
   height: ${(props) => `${props.height}px`};
-  background: ${colors.regularBackground};
-  border-top: 1px solid ${colors.activeButton};
+  background: ${colors.electricBlue};
+  border-top: 1px solid ${colors.deepBlueishPurple};
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding: 10px 30px;
@@ -73,11 +73,11 @@ const Content = styled.div<ContentProps>`
     text-decoration: none;
 
     &:hover {
-      color: ${colors.activeButton};
+      color: ${colors.deepBlueishPurple};
       text-decoration: underline;
 
       svg {
-        fill: ${colors.activeButton};
+        fill: ${colors.deepBlueishPurple};
       }
     }
 
@@ -98,7 +98,7 @@ const CloseModal = styled.div`
 const Hr = styled.hr`
   width: 350px;
   border-radius: 100% 5px;
-  border-color: ${colors.activeButton};
+  border-color: ${colors.deepBlueishPurple};
   margin: 10px 0;
 `;
 

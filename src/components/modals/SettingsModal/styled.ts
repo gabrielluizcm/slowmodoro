@@ -10,7 +10,7 @@ const InputWrapper = styled.div`
   margin-top: 5px;
 
   & > svg {
-    color: ${colors.glassBorder};
+    color: ${colors.blueishGreen};
     cursor: pointer;
   }
 `;

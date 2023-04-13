@@ -14,7 +14,7 @@ const NumberInputWrapper = styled.div`
   }
 
   svg {
-    color: ${colors.blackText};
+    color: ${colors.pureBlack};
     transform: scale(0.8);
   }
 `;
@@ -24,8 +24,8 @@ const NumberInputDisplay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${colors.blackText};
-  background: ${colors.darkenedRegularText};
+  color: ${colors.pureBlack};
+  background: ${colors.lightGrey};
   pointer-events: none;
 `;
 
@@ -37,17 +37,17 @@ const NumberInputControl = styled.button`
   justify-content: center;
   cursor: pointer;
   border: none;
-  color: ${colors.blackText};
+  color: ${colors.pureBlack};
 `;
 
 const NumberInputIncrease = styled(NumberInputControl)`
-  background: ${colors.shortWorkBackground};
+  background: ${colors.goldenYellow};
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
 
 const NumberInputDecrease = styled(NumberInputControl)`
-  background: ${colors.longWorkBackground};
+  background: ${colors.alizarinCrimson};
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 `;

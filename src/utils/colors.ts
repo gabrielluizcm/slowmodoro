@@ -1,16 +1,16 @@
 const colors = {
-  regularBackground: '#2c016d',
-  glassBackground: '#51d6ca99',
-  glassBorder: '#51d6ca',
-  regularText: '#e4e4e4',
-  darkenedRegularText: '#d3d3d3',
-  chillingBackground: '#ac73ff',
-  shortWorkBackground: '#d7ad0d',
-  longWorkBackground: '#c82b28',
-  blackText: '#010101',
-  activeButton: '#5f22d9',
-  darkenedActiveButton: '#4e11c8',
-  backShadow: '#0a0a0a88',
+  electricBlue: '#2c016d',
+  transparentBlueishGreen: '#51d6ca99',
+  blueishGreen: '#51d6ca',
+  brightSilver: '#e4e4e4',
+  lightGrey: '#d3d3d3',
+  electricPurple: '#ac73ff',
+  goldenYellow: '#d7ad0d',
+  alizarinCrimson: '#c82b28',
+  pureBlack: '#010101',
+  deepBlueishPurple: '#5f22d9',
+  deepPurple: '#4e11c8',
+  transparentBlack: '#0a0a0a88',
 };
 
 export default colors;
