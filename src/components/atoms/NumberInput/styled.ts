@@ -10,7 +10,7 @@ const NumberInputWrapper = styled.div`
   text-align: center;
 
   h4 {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   svg {
@@ -20,7 +20,7 @@ const NumberInputWrapper = styled.div`
 `;
 
 const NumberInputDisplay = styled.div`
-  height: 40px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
