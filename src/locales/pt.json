@@ -21,5 +21,7 @@
   "chillingTimerSettingLabel": "Descanso",
   "shortWorkTimerSettingLabel": "Trabalho curto",
   "longWorkTimerSettingLabel": "Trabalho longo",
-  "langSettingLabel": "Linguagem"
+  "langSettingLabel": "Linguagem",
+  "autoplayLabel": "Iniciar próximo timer automaticamente",
+  "silentModeLabel": "Habilitar sons"
 }

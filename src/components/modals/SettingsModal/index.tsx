@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
+import { AutoPlayContext, EnableSoundsContext } from '../../App';
 
 import NumberInput from '../../atoms/NumberInput';
+import Switch from '../../atoms/Switch';
 import LangSelector from '../../molecules/LangSelector';
 
 import { ModalContent, Hr } from '../../molecules/MenuModal/styled';
@@ -16,6 +18,8 @@ type SettingsModalProps = {
   setChillTime: (minutes: number) => void;
   setShortWorkTime: (minutes: number) => void;
   setLongWorkTime: (minutes: number) => void;
+  setAutoPlay: () => void;
+  setEnableSounds: () => void;
 };
 
 type HandleControlProps = {
@@ -25,6 +29,8 @@ type HandleControlProps = {
 
 export default function SettingsModal(props: SettingsModalProps) {
   const { t } = useTranslation();
+  const autoPlay = useContext(AutoPlayContext);
+  const enableSounds = useContext(EnableSoundsContext);
 
   const handleIncrease = (handleProps: HandleControlProps) => {
     if (handleProps.minutes === 59) return;
@@ -111,6 +117,10 @@ export default function SettingsModal(props: SettingsModalProps) {
       <InputWrapper>
         <LangSelector />
       </InputWrapper>
+      <Hr />
+      <InputLabel>Misc</InputLabel>
+      <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.setAutoPlay} />
+      <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.setEnableSounds} />
     </ModalContent>
   );
 }

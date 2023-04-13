@@ -5,6 +5,7 @@ const colors = {
   orangeishPink: '#f15ba6',
   brightSilver: '#e4e4e4',
   lightGrey: '#d3d3d3',
+  flatGrey: '#5b5b5b',
   electricPurple: '#ac73ff',
   goldenYellow: '#d7ad0d',
   alizarinCrimson: '#c82b28',

@@ -21,5 +21,7 @@
   "chillingTimerSettingLabel": "Chilling",
   "shortWorkTimerSettingLabel": "Short Work",
   "longWorkTimerSettingLabel": "Long Work",
-  "langSettingLabel": "Language"
+  "langSettingLabel": "Language",
+  "autoplayLabel": "Autoplay next cycle when timer ends",
+  "silentModeLabel": "Enable sounds"
 }

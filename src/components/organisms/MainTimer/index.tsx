@@ -1,7 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { StatusContext, PausedContext, ReversePomodorosContext } from '../../App';
+import {
+  StatusContext,
+  PausedContext,
+  ReversePomodorosContext,
+  AutoPlayContext,
+  EnableSoundsContext
+} from '../../App';
 
 import { Button } from '../../atoms/Button';
 import { TimerSwitch } from '../../molecules/TimerSwitch';
@@ -31,6 +37,9 @@ export type Status = 'idle' | 'chilling' | 'working';
 
 export function MainTimer(props: MainTimerProps) {
   const { t } = useTranslation();
+  const autoPlay = useContext(AutoPlayContext);
+  const enableSounds = useContext(EnableSoundsContext);
+
   const [chillTime, setChillTime] = React.useState(props.chillTime);
   const [workTime, setWorkTime] = React.useState(props.shortWorkTime);
 
@@ -65,28 +74,29 @@ export function MainTimer(props: MainTimerProps) {
 
   const resetChill = () => {
     setChillTime(props.chillTime);
-    props.setPaused(false);
+    props.setPaused(!autoPlay);
     increaseAndCheckReversePomodoros();
     props.setStatus('working');
   };
 
   const resetWork = () => {
-    props.setPaused(false);
+    props.setPaused(!autoPlay);
     setWorkTime(props.shortWorkTime);
     props.setStatus('chilling');
   };
 
   const startTimer = () => {
-    new Audio(timerStartClick).play();
+    if (enableSounds) new Audio(timerStartClick).play();
     props.setPaused(false);
   };
 
   const timerPauseSwitch = () => {
-    let audio = new Audio(timerResumeClick);
+    if (enableSounds) {
+      let audio = new Audio(timerResumeClick);
+      if (!paused) audio = new Audio(timerPauseClick);
+      audio.play();
+    }
 
-    if (!paused) audio = new Audio(timerPauseClick);
-
-    audio.play();
     props.setPaused(!paused);
   };
 
@@ -121,7 +131,7 @@ export function MainTimer(props: MainTimerProps) {
   const checkChillTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (chillTime <= 1) {
-      new Audio(startWorkAlert).play();
+      if (enableSounds) new Audio(startWorkAlert).play();
       resetChill();
     }
   };
@@ -129,7 +139,7 @@ export function MainTimer(props: MainTimerProps) {
   const checkWorkTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (workTime <= 1) {
-      new Audio(startChillAlert).play();
+      if (enableSounds) new Audio(startChillAlert).play();
       resetWork();
     }
   };

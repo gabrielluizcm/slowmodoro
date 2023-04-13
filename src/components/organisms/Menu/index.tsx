@@ -14,6 +14,8 @@ type MenuProps = {
   setChillTime: (minutes: number) => void;
   setShortWorkTime: (minutes: number) => void;
   setLongWorkTime: (minutes: number) => void;
+  setAutoPlay: () => void;
+  setEnableSounds: () => void;
 };
 
 export function Menu(props: MenuProps) {
@@ -52,7 +54,7 @@ export function Menu(props: MenuProps) {
       <MenuModal
         closeModal={() => setModalCogOpen(false)}
         opened={modalCogOpen}
-        height={350}
+        height={450}
       >
         <SettingsModal
           chillTime={props.chillTime}
@@ -61,6 +63,8 @@ export function Menu(props: MenuProps) {
           setChillTime={props.setChillTime}
           setShortWorkTime={props.setShortWorkTime}
           setLongWorkTime={props.setLongWorkTime}
+          setAutoPlay={props.setAutoPlay}
+          setEnableSounds={props.setEnableSounds}
         />
       </MenuModal>
       <MenuModal
