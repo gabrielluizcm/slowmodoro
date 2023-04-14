@@ -31,7 +31,7 @@ const SwitchSlider = styled.div<SwitchProps>`
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  padding: 0 2px;
+  padding: 2px;
   transition: background-color 0.3s ease-out;
 `;
 

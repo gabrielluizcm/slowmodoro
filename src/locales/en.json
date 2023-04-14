@@ -31,5 +31,8 @@
   "silentModeLabel": "Enable sounds",
   "reverseModeLabel": "Reverse mode",
   "confirmToggleReverseMode": "Current timers will be reset! Are you sure you want to toggle Reverse Mode?",
-  "wakeModeLabel": "Prevent screen from locking"
+  "wakeModeLabel": "Prevent screen from locking",
+  "wakeLockRelease": "Wake Lock was successfully released",
+  "alertErrorRequestLock": "Wake Lock couldn't be enabled",
+  "confirmFakeLock": "Your browser doesn't support the required API for this feature, an alternative method that demands more CPU usage will be used. Do you wish to continue?"
 }

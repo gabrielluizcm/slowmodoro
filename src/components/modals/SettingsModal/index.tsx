@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
@@ -15,8 +15,6 @@ import LangSelector from '../../molecules/LangSelector';
 
 import { ModalContent, Hr } from '../../molecules/MenuModal/styled';
 import { InputWrapper, InputLabel } from './styled';
-import { Exception } from 'sass';
-import { ExecException } from 'child_process';
 
 type SettingsModalProps = {
   chillTime: number;
@@ -42,15 +40,29 @@ export default function SettingsModal(props: SettingsModalProps) {
   const enableSounds = useContext(EnableSoundsContext);
   const reverseMode = useContext(ReverseModeContext);
 
+  const [supportsWakeLock, setSupportsWakeLock] = useState(false);
   const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
+  const [videoLockSrc, setVideoLockSrc] = useState('');
   const [wakeLockMode, setWakeLockMode] = useState(false);
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
+    if (navigator.wakeLock && 'request' in navigator.wakeLock)
+      setSupportsWakeLock(true);
+
     return () => {
       if (wakeLock) {
-        wakeLock.release().then(() => {
-          console.log('Wake Lock was successfully released');
-        });
+        if (supportsWakeLock)
+          wakeLock.release().then(() => {
+            console.log(t('wakeLockRelease'));
+          });
+        else {
+          URL.revokeObjectURL(videoLockSrc);
+          videoRef.current?.removeEventListener(
+            'loadedmetadata', handleLoadedMetadata
+          );
+        }
       }
     };
   }, []);
@@ -85,33 +97,60 @@ export default function SettingsModal(props: SettingsModalProps) {
     props.toggleReverseMode();
   }
 
+  const handleLoadedMetadata = () => {
+    videoRef.current?.play();
+  };
+
   const handleToggleWakeMode = () => {
     const requestWakeLock = async () => {
       try {
         const wakeLock = await navigator.wakeLock.request('screen');
         setWakeLock(wakeLock);
-      } catch (err: any) {
-        console.error(`${err.name}, ${err.message}`);
+      } catch (err) {
+        console.error(err);
+        alert(t('alertErrorRequestLock'));
       }
     }
 
-    if (wakeLock) {
-      return wakeLock.release().then(() => {
-        setWakeLockMode(false);
-        setWakeLock(null);
-      })
+    const fakeWakeLock = () => {
+      const videoUrl = URL.createObjectURL(new Blob([], { type: 'video/mp4' }));
+      setVideoLockSrc(videoUrl);
+
+      videoRef.current?.addEventListener('loadedmetadata', handleLoadedMetadata);
     }
 
-    if (navigator.wakeLock && 'request' in navigator.wakeLock) {
-      requestWakeLock();
-      setWakeLockMode(true);
+    if (wakeLockMode) {
+      if (supportsWakeLock)
+        wakeLock?.release().then(() => {
+          setWakeLock(null);
+        })
+      else {
+        URL.revokeObjectURL(videoLockSrc);
+        videoRef.current?.removeEventListener(
+          'loadedmetadata', handleLoadedMetadata
+        );
+      }
+      return setWakeLockMode(false);
     }
-    else
-      console.error(`Not supported`);
+
+    if (supportsWakeLock)
+      requestWakeLock();
+    else {
+      const confirmText = t('confirmFakeLock')
+      if (!confirm(confirmText)) return;
+      fakeWakeLock();
+    }
+
+    setWakeLockMode(true);
   }
 
   return (
     <ModalContent>
+      {!supportsWakeLock && (
+        <video ref={videoRef} style={{ display: 'none' }} loop>
+          <source src={videoLockSrc} type="video/mp4" />
+        </video>
+      )}
       <h2>
         {t('settingsLabel')} <FaCog />
       </h2>

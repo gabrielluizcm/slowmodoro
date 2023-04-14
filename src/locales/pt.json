@@ -31,5 +31,8 @@
   "silentModeLabel": "Habilitar sons",
   "reverseModeLabel": "Modo reverso",
   "confirmToggleReverseMode": "Os temporizadores atuais serão resetados! Tem certeza que deseja alterar no modo reverso?",
-  "wakeModeLabel": "Manter a tela ativa"
+  "wakeModeLabel": "Manter a tela ativa",
+  "wakeLockRelease": "Wake Lock liberado com sucesso",
+  "alertErrorRequestLock": "Wake Lock não pôde ser ativado",
+  "confirmFakeLock": "Seu navegador não tem suporte à API necessária para essa funcionalidade, um método alternativo com maior gasto de CPU será usado. Deseja continuar?"
 }
