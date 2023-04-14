@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
+import NoSleep from 'nosleep.js';
 
 import {
   StatusContext,
@@ -42,28 +43,21 @@ export default function SettingsModal(props: SettingsModalProps) {
 
   const [supportsWakeLock, setSupportsWakeLock] = useState(false);
   const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
-  const [videoLockSrc, setVideoLockSrc] = useState('');
+  const [noSleepLock] = useState(new NoSleep());
   const [wakeLockMode, setWakeLockMode] = useState(false);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   useEffect(() => {
-    if (navigator.wakeLock && 'request' in navigator.wakeLock)
+    if ('wakeLock' in navigator && 'request' in navigator.wakeLock)
       setSupportsWakeLock(true);
 
     return () => {
-      if (wakeLock) {
+      if (wakeLock)
         if (supportsWakeLock)
           wakeLock.release().then(() => {
             console.log(t('wakeLockRelease'));
           });
-        else {
-          URL.revokeObjectURL(videoLockSrc);
-          videoRef.current?.removeEventListener(
-            'loadedmetadata', handleLoadedMetadata
-          );
-        }
-      }
+        else
+          noSleepLock.disable();
     };
   }, []);
 
@@ -97,10 +91,6 @@ export default function SettingsModal(props: SettingsModalProps) {
     props.toggleReverseMode();
   }
 
-  const handleLoadedMetadata = () => {
-    videoRef.current?.play();
-  };
-
   const handleToggleWakeMode = () => {
     const requestWakeLock = async () => {
       try {
@@ -112,24 +102,13 @@ export default function SettingsModal(props: SettingsModalProps) {
       }
     }
 
-    const fakeWakeLock = () => {
-      const videoUrl = URL.createObjectURL(new Blob([], { type: 'video/mp4' }));
-      setVideoLockSrc(videoUrl);
-
-      videoRef.current?.addEventListener('loadedmetadata', handleLoadedMetadata);
-    }
-
     if (wakeLockMode) {
       if (supportsWakeLock)
         wakeLock?.release().then(() => {
           setWakeLock(null);
         })
-      else {
-        URL.revokeObjectURL(videoLockSrc);
-        videoRef.current?.removeEventListener(
-          'loadedmetadata', handleLoadedMetadata
-        );
-      }
+      else
+        noSleepLock.disable();
       return setWakeLockMode(false);
     }
 
@@ -138,7 +117,7 @@ export default function SettingsModal(props: SettingsModalProps) {
     else {
       const confirmText = t('confirmFakeLock')
       if (!confirm(confirmText)) return;
-      fakeWakeLock();
+      noSleepLock.enable();
     }
 
     setWakeLockMode(true);
@@ -146,11 +125,6 @@ export default function SettingsModal(props: SettingsModalProps) {
 
   return (
     <ModalContent>
-      {!supportsWakeLock && (
-        <video ref={videoRef} style={{ display: 'none' }} loop>
-          <source src={videoLockSrc} type="video/mp4" />
-        </video>
-      )}
       <h2>
         {t('settingsLabel')} <FaCog />
       </h2>
