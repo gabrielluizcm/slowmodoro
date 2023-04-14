@@ -30,5 +30,6 @@
   "autoplayLabel": "Iniciar próximo timer automaticamente",
   "silentModeLabel": "Habilitar sons",
   "reverseModeLabel": "Modo reverso",
-  "confirmToggleReverseMode": "Os temporizadores atuais serão resetados! Tem certeza que deseja alterar no modo reverso?"
+  "confirmToggleReverseMode": "Os temporizadores atuais serão resetados! Tem certeza que deseja alterar no modo reverso?",
+  "wakeModeLabel": "Manter a tela ativa"
 }

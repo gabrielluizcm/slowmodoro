@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 import { Logo } from '../atoms/Logo';
 import { Menu } from '../organisms/Menu';
@@ -20,18 +20,18 @@ export const EnableSoundsContext = createContext(true);
 export const ReverseModeContext = createContext(false);
 
 function App() {
-  const [status, setStatus] = React.useState<Status>('idle');
-  const [paused, setPaused] = React.useState(false);
-  const [startChillTime, setStartChillTime] = React.useState(25 * 60);
-  const [startShortWorkTime, setStartShortWorkTime] = React.useState(5 * 60);
-  const [startLongWorkTime, setStartLongWorkTime] = React.useState(15 * 60);
-  const [reversePomodoros, setReversePomodoros] = React.useState(0);
-  const [pomodoros, setPomodoros] = React.useState(0);
-  const [totalChillingTime, setTotalChillingTime] = React.useState(0);
-  const [totalWorkingTime, setTotalWorkingTime] = React.useState(0);
-  const [autoPlay, setAutoPlay] = React.useState(true);
-  const [enableSounds, setEnableSounds] = React.useState(true);
-  const [reverseMode, setReverseMode] = React.useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+  const [paused, setPaused] = useState(false);
+  const [startChillTime, setStartChillTime] = useState(25 * 60);
+  const [startShortWorkTime, setStartShortWorkTime] = useState(5 * 60);
+  const [startLongWorkTime, setStartLongWorkTime] = useState(15 * 60);
+  const [reversePomodoros, setReversePomodoros] = useState(0);
+  const [pomodoros, setPomodoros] = useState(0);
+  const [totalChillingTime, setTotalChillingTime] = useState(0);
+  const [totalWorkingTime, setTotalWorkingTime] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const [enableSounds, setEnableSounds] = useState(true);
+  const [reverseMode, setReverseMode] = useState(false);
 
   const increaseTotalChillingTime = () => {
     setTotalChillingTime(totalChillingTime + 1);

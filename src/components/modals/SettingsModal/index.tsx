@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
 
@@ -15,6 +15,8 @@ import LangSelector from '../../molecules/LangSelector';
 
 import { ModalContent, Hr } from '../../molecules/MenuModal/styled';
 import { InputWrapper, InputLabel } from './styled';
+import { Exception } from 'sass';
+import { ExecException } from 'child_process';
 
 type SettingsModalProps = {
   chillTime: number;
@@ -39,6 +41,19 @@ export default function SettingsModal(props: SettingsModalProps) {
   const autoPlay = useContext(AutoPlayContext);
   const enableSounds = useContext(EnableSoundsContext);
   const reverseMode = useContext(ReverseModeContext);
+
+  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
+  const [wakeLockMode, setWakeLockMode] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (wakeLock) {
+        wakeLock.release().then(() => {
+          console.log('Wake Lock was successfully released');
+        });
+      }
+    };
+  }, []);
 
   const handleIncrease = (handleProps: HandleControlProps) => {
     if (handleProps.minutes === 59) return;
@@ -68,6 +83,31 @@ export default function SettingsModal(props: SettingsModalProps) {
       return;
 
     props.toggleReverseMode();
+  }
+
+  const handleToggleWakeMode = () => {
+    const requestWakeLock = async () => {
+      try {
+        const wakeLock = await navigator.wakeLock.request('screen');
+        setWakeLock(wakeLock);
+      } catch (err: any) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    }
+
+    if (wakeLock) {
+      return wakeLock.release().then(() => {
+        setWakeLockMode(false);
+        setWakeLock(null);
+      })
+    }
+
+    if (navigator.wakeLock && 'request' in navigator.wakeLock) {
+      requestWakeLock();
+      setWakeLockMode(true);
+    }
+    else
+      console.error(`Not supported`);
   }
 
   return (
@@ -147,6 +187,7 @@ export default function SettingsModal(props: SettingsModalProps) {
       <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.toggleAutoPlay} />
       <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.toggleEnableSounds} />
       <Switch label={t('reverseModeLabel')} active={reverseMode} onClick={handleToggleMode} />
+      <Switch label={t('wakeModeLabel')} active={wakeLockMode} onClick={handleToggleWakeMode} />
     </ModalContent>
   );
 }

@@ -30,5 +30,6 @@
   "autoplayLabel": "Autoplay next cycle when timer ends",
   "silentModeLabel": "Enable sounds",
   "reverseModeLabel": "Reverse mode",
-  "confirmToggleReverseMode": "Current timers will be reset! Are you sure you want to toggle Reverse Mode?"
+  "confirmToggleReverseMode": "Current timers will be reset! Are you sure you want to toggle Reverse Mode?",
+  "wakeModeLabel": "Prevent screen from locking"
 }
