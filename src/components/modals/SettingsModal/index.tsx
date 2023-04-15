@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCog, FaExchangeAlt } from 'react-icons/fa';
+import NoSleep from 'nosleep.js';
 
+import {
+  StatusContext,
+  AutoPlayContext,
+  EnableSoundsContext,
+  ReverseModeContext
+} from '../../App';
 
 import NumberInput from '../../atoms/NumberInput';
+import Switch from '../../atoms/Switch';
 import LangSelector from '../../molecules/LangSelector';
 
 import { ModalContent, Hr } from '../../molecules/MenuModal/styled';
@@ -16,6 +24,9 @@ type SettingsModalProps = {
   setChillTime: (minutes: number) => void;
   setShortWorkTime: (minutes: number) => void;
   setLongWorkTime: (minutes: number) => void;
+  toggleAutoPlay: () => void;
+  toggleEnableSounds: () => void;
+  toggleReverseMode: () => void;
 };
 
 type HandleControlProps = {
@@ -25,6 +36,30 @@ type HandleControlProps = {
 
 export default function SettingsModal(props: SettingsModalProps) {
   const { t } = useTranslation();
+  const status = useContext(StatusContext);
+  const autoPlay = useContext(AutoPlayContext);
+  const enableSounds = useContext(EnableSoundsContext);
+  const reverseMode = useContext(ReverseModeContext);
+
+  const [supportsWakeLock, setSupportsWakeLock] = useState(false);
+  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
+  const [noSleepLock] = useState(new NoSleep());
+  const [wakeLockMode, setWakeLockMode] = useState(false);
+
+  useEffect(() => {
+    if ('wakeLock' in navigator && 'request' in navigator.wakeLock)
+      setSupportsWakeLock(true);
+
+    return () => {
+      if (wakeLock)
+        if (supportsWakeLock)
+          wakeLock.release().then(() => {
+            console.log(t('wakeLockRelease'));
+          });
+        else
+          noSleepLock.disable();
+    };
+  }, []);
 
   const handleIncrease = (handleProps: HandleControlProps) => {
     if (handleProps.minutes === 59) return;
@@ -48,6 +83,46 @@ export default function SettingsModal(props: SettingsModalProps) {
     props.setShortWorkTime(temp);
   };
 
+  const handleToggleMode = () => {
+    const confirmText = t('confirmToggleReverseMode');
+    if (status !== 'idle' && !confirm(confirmText))
+      return;
+
+    props.toggleReverseMode();
+  }
+
+  const handleToggleWakeMode = () => {
+    const requestWakeLock = async () => {
+      try {
+        const wakeLock = await navigator.wakeLock.request('screen');
+        setWakeLock(wakeLock);
+      } catch (err) {
+        console.error(err);
+        alert(t('alertErrorRequestLock'));
+      }
+    }
+
+    if (wakeLockMode) {
+      if (supportsWakeLock)
+        wakeLock?.release().then(() => {
+          setWakeLock(null);
+        })
+      else
+        noSleepLock.disable();
+      return setWakeLockMode(false);
+    }
+
+    if (supportsWakeLock)
+      requestWakeLock();
+    else {
+      const confirmText = t('confirmFakeLock')
+      if (!confirm(confirmText)) return;
+      noSleepLock.enable();
+    }
+
+    setWakeLockMode(true);
+  }
+
   return (
     <ModalContent>
       <h2>
@@ -56,7 +131,10 @@ export default function SettingsModal(props: SettingsModalProps) {
       <InputLabel>{t('timersSettingLabel')}</InputLabel>
       <InputWrapper>
         <NumberInput
-          label={t('chillingTimerSettingLabel')}
+          label={!reverseMode
+            ? t('chillingTimerSettingLabel')
+            : t('workingTimerSettingLabel')
+          }
           value={props.chillTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -73,7 +151,10 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapChillShort} />
         <NumberInput
-          label={t('shortWorkTimerSettingLabel')}
+          label={!reverseMode
+            ? t('shortWorkTimerSettingLabel')
+            : t('shortChillTimerSettingLabel')
+          }
           value={props.shortWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -90,7 +171,10 @@ export default function SettingsModal(props: SettingsModalProps) {
         />
         <FaExchangeAlt onClick={handleSwapShortLong} />
         <NumberInput
-          label={t('longWorkTimerSettingLabel')}
+          label={!reverseMode
+            ? t('longWorkTimerSettingLabel')
+            : t('longChillTimerSettingLabel')
+          }
           value={props.longWorkTime}
           onIncreaseClick={() =>
             handleIncrease({
@@ -111,6 +195,12 @@ export default function SettingsModal(props: SettingsModalProps) {
       <InputWrapper>
         <LangSelector />
       </InputWrapper>
+      <Hr />
+      <InputLabel>{t('optionsSettingLabel')}</InputLabel>
+      <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.toggleAutoPlay} />
+      <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.toggleEnableSounds} />
+      <Switch label={t('reverseModeLabel')} active={reverseMode} onClick={handleToggleMode} />
+      <Switch label={t('wakeModeLabel')} active={wakeLockMode} onClick={handleToggleWakeMode} />
     </ModalContent>
   );
 }

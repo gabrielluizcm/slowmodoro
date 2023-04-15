@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FaGithub, FaGithubAlt } from 'react-icons/fa';
+import { FaGithub, FaGithubAlt, FaHeart } from 'react-icons/fa';
 
 import { StyledFooter, GitLinks } from './styled';
 
@@ -27,7 +27,7 @@ export function Footer() {
         </a>
       </GitLinks>
       <p>
-        {t('footer')}{' '}
+        {t('footer')}<FaHeart />{t('footerBy')}{' '}
         <a
           href="http://gabrielluizcm.github.io"
           target="_blank"

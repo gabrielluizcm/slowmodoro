@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
-const StyledMenu = styled.div`
+import { Status } from '../../App/index';
+
+interface StyledMenuProps {
+  status: Status;
+  paused: boolean;
+  reverseMode: boolean;
+  longWork: boolean;
+  longChill: boolean;
+};
+
+const StyledMenu = styled.div<StyledMenuProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -10,7 +20,22 @@ const StyledMenu = styled.div`
   margin: 15px;
   font-size: 1.5em;
   cursor: pointer;
-  background-color: ${colors.deepBlueishPurple};
+  background-color: ${(props) => {
+    if (props.paused || props.status === 'idle')
+      return colors.deepBlueishPurple;
+
+    if (!props.reverseMode) {
+      if (props.status === 'chilling') return colors.deepPurple;
+      else
+        if (props.longWork) return colors.goldenYellow;
+        else return colors.alizarinCrimson;
+    }
+
+    if (props.status === 'chilling') return colors.alizarinCrimson;
+    else
+      if (props.longChill) return colors.green;
+      else return colors.deepPurple;
+  }};;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,18 +43,18 @@ const StyledMenu = styled.div`
   padding: 10px;
   border-radius: 50px;
   z-index: 999;
+  transition: background-color 0.3s ease-in-out;
 `;
 
-type MenuDrawerProps = {
+interface StyledMenuDrawerProps extends StyledMenuProps {
   opened: boolean;
-  transition: string;
-};
+}
 
-const StyledMenuDrawer = styled(StyledMenu)`
+const StyledMenuDrawer = styled(StyledMenu) <StyledMenuDrawerProps>`
   z-index: 998;
   justify-content: flex-end;
-  transition: height 0.3s ease-in-out;
-  height: ${(props: MenuDrawerProps) => (props.opened ? '5.5em' : '50px')};
+  transition: all 0.3s ease-in-out;
+  height: ${(props) => (props.opened ? '5.5em' : '50px')};
 
   svg:first-child {
     margin-bottom: 0.5em;
