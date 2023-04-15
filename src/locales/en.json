@@ -27,6 +27,7 @@
   "shortChillTimerSettingLabel": "Short Chill",
   "longChillTimerSettingLabel": "Long Chill",
   "langSettingLabel": "Language",
+  "optionsSettingLabel": "Options",
   "autoplayLabel": "Autoplay next cycle when timer ends",
   "silentModeLabel": "Enable sounds",
   "reverseModeLabel": "Reverse mode",

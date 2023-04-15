@@ -196,7 +196,7 @@ export default function SettingsModal(props: SettingsModalProps) {
         <LangSelector />
       </InputWrapper>
       <Hr />
-      <InputLabel>Misc</InputLabel>
+      <InputLabel>{t('optionsSettingLabel')}</InputLabel>
       <Switch label={t('autoplayLabel')} active={autoPlay} onClick={props.toggleAutoPlay} />
       <Switch label={t('silentModeLabel')} active={enableSounds} onClick={props.toggleEnableSounds} />
       <Switch label={t('reverseModeLabel')} active={reverseMode} onClick={handleToggleMode} />

@@ -27,6 +27,7 @@
   "shortChillTimerSettingLabel": "Descanso curto",
   "longChillTimerSettingLabel": "Descanso longo",
   "langSettingLabel": "Linguagem",
+  "optionsSettingLabel": "Opções",
   "autoplayLabel": "Iniciar próximo timer automaticamente",
   "silentModeLabel": "Habilitar sons",
   "reverseModeLabel": "Modo reverso",
