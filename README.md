@@ -40,6 +40,14 @@ There are some features I want to develop but aren't still present in the curren
   - Colors have more meaningful names.
 - v2.1.2:
   - Changed colors in **Settings Menu** to fit the palette better.
+- v2.2.0:
+  - **FEAT:** Autoplay next timer when cycle ends is now toggleable;
+  - **FEAT:** Sounds can now be disabled;
+  - **FEAT:** Added *Reverse mode* so the app behaves like a regular Pomodoro app;
+  - **FEAT:** No-sleep mode to prevent device screen from locking when inactive;
+    - Uses WakeLock API on supported browsers, and NoSleep.JS library on those who aren't.
+  - Menu icon and drawer now change colors alongside the background to increase contrast
+  - Fixed small alignment bug on switch buttons.
 
 # Nerd stuff
 
