@@ -48,6 +48,9 @@ There are some features I want to develop but aren't still present in the curren
     - Uses WakeLock API on supported browsers, and NoSleep.JS library on those who aren't.
   - Menu icon and drawer now change colors alongside the background to increase contrast
   - Fixed small alignment bug on switch buttons.
+- v2.2.1:
+  - **FIX:** Flags on language selector are now being properly displaying across browsers;
+  - Reduced vertical margins inside timer container to improve usage on smaller screens.
 
 # Nerd stuff
 
