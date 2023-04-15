@@ -13,6 +13,7 @@ const SwitchWrapper = styled.div`
 
   h4 {
     font-size: 12px;
+    width: 240px;
   }
 `;
 
