@@ -11,7 +11,7 @@ type LangButtonProps = {
 export default function LangButton(props: LangButtonProps) {
   return (
     <div onClick={props.onClick}>
-      <StyledReactCountryFlag countryCode={props.countryCode} style={{ fontSize: '1.8em' }} />
+      <StyledReactCountryFlag countryCode={props.countryCode} svg />
       {props.active && <Tick />}
     </div>
   )
