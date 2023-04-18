@@ -153,7 +153,10 @@ export function MainTimer(props: MainTimerProps) {
   const checkChillTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (chillTime <= 1) {
-      if (enableSounds) new Audio(startWorkAlert).play();
+      if (enableSounds) {
+        const sound = reverseMode ? startChillAlert : startWorkAlert;
+        new Audio(sound).play();
+      }
       resetChill();
     }
   };
@@ -161,7 +164,10 @@ export function MainTimer(props: MainTimerProps) {
   const checkWorkTimeLeft = () => {
     // Checking against 1 to prevent state change delay from altering counters
     if (workTime <= 1) {
-      if (enableSounds) new Audio(startChillAlert).play();
+      if (enableSounds) {
+        const sound = reverseMode ? startWorkAlert : startChillAlert;
+        new Audio(sound).play();
+      }
       resetWork();
     }
   };

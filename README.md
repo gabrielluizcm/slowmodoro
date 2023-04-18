@@ -13,8 +13,8 @@ Below the buttons you will find the **counters**: **total chill time**, **total 
 
 ## Updates
 
-There are some features I want to develop but aren't still present in the current version, but will be added on the following weeks. Planned updates include, but are not limited to:
-- Toggle auto play when timer ends
+Currently there's no planned updates, as I made every feature I thought of when creating this project, so this version *(v2.2.2)* will be the final build, probably.
+If you happen to have any suggestion or find a bug, please feel free to use the ***Issues*** tab to keep me informed so I can work on it! :)
 
 ### Changelog
 - v1.1:
@@ -51,6 +51,8 @@ There are some features I want to develop but aren't still present in the curren
 - v2.2.1:
   - **FIX:** Flags on language selector are now being properly displaying across browsers;
   - Reduced vertical margins inside timer container to improve usage on smaller screens.
+- v2.2.2:
+  - **FIX:** Correct alerts are now playing when using Reverse mode.
 
 # Nerd stuff
 
