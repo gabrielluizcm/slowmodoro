@@ -22,8 +22,8 @@ export const ReverseModeContext = createContext(false);
 function App() {
   const [status, setStatus] = useState<Status>('idle');
   const [paused, setPaused] = useState(false);
-  const [startChillTime, setStartChillTime] = useState(25 * 60);
-  const [startShortWorkTime, setStartShortWorkTime] = useState(5 * 60);
+  const [startChillTime, setStartChillTime] = useState(5);
+  const [startShortWorkTime, setStartShortWorkTime] = useState(5);
   const [startLongWorkTime, setStartLongWorkTime] = useState(15 * 60);
   const [reversePomodoros, setReversePomodoros] = useState(0);
   const [pomodoros, setPomodoros] = useState(0);
